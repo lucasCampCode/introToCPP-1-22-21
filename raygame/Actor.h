@@ -29,6 +29,7 @@ public:
     /// <param name="maxSpeed">The largest the magnitude of the actors velocity can be.</param>
     Actor(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed);
 
+    ~Actor();
     /// <summary>
     /// </summary>
     /// <returns>If the actors start function has been called.</returns>

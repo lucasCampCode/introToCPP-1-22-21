@@ -132,7 +132,7 @@ bool Game::removeScene(Scene* scene)
 	bool sceneRemoved = false;
 
 	//Create a new temporary array that is one less than our original array
-	Scene** tempArray = new Scene*[m_sceneCount];
+	Scene** tempArray = new Scene*[m_sceneCount - 1];
 
 	//Copy all scenes except the scene we don't want into the new array
 	int j = 0;

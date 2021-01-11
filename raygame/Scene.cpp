@@ -7,6 +7,12 @@ Scene::Scene()
     m_world = new MathLibrary::Matrix3();
 }
 
+Scene::~Scene()
+{
+    delete[] m_actors;
+    delete m_world;
+}
+
 MathLibrary::Matrix3* Scene::getWorld()
 {
     return m_world;
@@ -45,7 +51,7 @@ bool Scene::removeActor(int index)
     bool actorRemoved = false;
 
     //Create a new array with a size one less than our old array 
-    Actor** newArray = new Actor * [m_actorCount + 1];
+    Actor** newArray = new Actor * [m_actorCount - 1];
     //Create variable to access tempArray index
     int j = 0;
     //Copy values from the old array to the new array
@@ -81,7 +87,7 @@ bool Scene::removeActor(Actor* actor)
 
     bool actorRemoved = false;
     //Create a new array with a size one less than our old array
-    Actor** newArray = new Actor * [m_actorCount + 1];
+    Actor** newArray = new Actor * [m_actorCount - 1];
     //Create variable to access tempArray index
     int j = 0;
     //Copy values from the old array to the new array
