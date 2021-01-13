@@ -37,6 +37,8 @@ Actor::~Actor()
     delete m_rotation;
     delete m_translation;
     delete m_scale;
+    delete[] m_children;
+    delete m_sprite;
 }
 
 MathLibrary::Vector2 Actor::getForward()
