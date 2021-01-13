@@ -27,6 +27,28 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	SetTargetFPS(60);
+	startMenu();
+}
+
+void Game::startMenu()
+{
+	char start[] = "START";
+	char* startptr = start;
+	char HighScore[] = "HighScores";
+	char* HighScoreptr = HighScore;
+	//draws start window loop
+	while (!WindowShouldClose()) {
+		BeginDrawing();
+		ClearBackground(BLACK);
+		//DrawRectangle(GetScreenWidth() / 2 - 200, 150, 400, 100, GREEN);
+		//DrawRectangle(GetScreenWidth() / 2 - 200, 300, 400, 100, ORANGE);
+		//DrawRectangle(GetScreenWidth() / 2 - 200, 450, 400, 100, DARKBLUE);
+		//DrawRectangle(GetScreenWidth() / 2 - 200, 600, 400, 100, RED);
+		DrawText(startptr, GetScreenWidth() / 2 - 160, 160, 90, RAYWHITE);
+		DrawText(HighScoreptr, GetScreenWidth() / 2 - 190, 315, 68, RAYWHITE);
+		/*DrawRectanglePro(Rectangle{ 16,16,16,16 }, Vector2{ 8,8 }, 45.0f, GREEN);*/
+		EndDrawing();
+	}
 }
 
 void Game::update(float deltaTime)
