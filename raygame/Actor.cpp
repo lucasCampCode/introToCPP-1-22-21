@@ -257,7 +257,7 @@ void Actor::update(float deltaTime)
         m_velocity = m_velocity.getNormalized() * m_maxSpeed;
 
     //Increase position by the current velocity
-    setLocalPosition(m_velocity * deltaTime);
+    setLocalPosition(getLocalPosition() + m_velocity * deltaTime);
 }
 
 void Actor::draw()
