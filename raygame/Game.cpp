@@ -16,6 +16,15 @@ Game::Game()
 	m_sceneCount = 0;
 }
 
+bool Game::withinBounds(int Lp, int Tp, int Rp, int Bp)
+{
+	float mouseposx = GetMouseX();
+	float mouseposy = GetMouseY();
+	if (mouseposx >= Lp && mouseposx <= Rp && mouseposy >= Tp && mouseposy <= Bp)
+		return true;
+	return false;
+}
+
 void Game::start()
 {
 	int screenWidth = 1024;
@@ -32,20 +41,26 @@ void Game::start()
 
 void Game::startMenu()
 {
-	char start[] = "START";
-	char* startptr = start;
-	char HighScore[] = "HighScores";
-	char* HighScoreptr = HighScore;
+	char start[] = "Start";
+	char* startPtr = start;
+	char highScore[] = "HighScores";
+	char* highScorePtr = highScore;
+	char load[] = "Load";
+	char* loadPtr = load;
+	char exit[] = "Exit";
+	char* exitPtr = exit;
 	//draws start window loop
-	while (!WindowShouldClose()) {
+	while (!IsMouseButtonDown(MOUSE_LEFT_BUTTON) || !withinBounds(GetScreenWidth() / 2 - 200, 150, GetScreenWidth() / 2 + 200, 250)) {
 		BeginDrawing();
 		ClearBackground(BLACK);
-		//DrawRectangle(GetScreenWidth() / 2 - 200, 150, 400, 100, GREEN);
-		//DrawRectangle(GetScreenWidth() / 2 - 200, 300, 400, 100, ORANGE);
-		//DrawRectangle(GetScreenWidth() / 2 - 200, 450, 400, 100, DARKBLUE);
-		//DrawRectangle(GetScreenWidth() / 2 - 200, 600, 400, 100, RED);
-		DrawText(startptr, GetScreenWidth() / 2 - 160, 160, 90, RAYWHITE);
-		DrawText(HighScoreptr, GetScreenWidth() / 2 - 190, 315, 68, RAYWHITE);
+		DrawRectangle(GetScreenWidth() / 2 - 200, 150, 400, 100, GREEN);
+		DrawRectangle(GetScreenWidth() / 2 - 200, 300, 400, 100, ORANGE);
+		DrawRectangle(GetScreenWidth() / 2 - 200, 450, 400, 100, DARKBLUE);
+		DrawRectangle(GetScreenWidth() / 2 - 200, 600, 400, 100, RED);
+		DrawText(startPtr, GetScreenWidth() / 2 - 115, 160, 90, RAYWHITE);
+		DrawText(highScorePtr, GetScreenWidth() / 2 - 190, 315, 68, RAYWHITE);
+		DrawText(loadPtr, GetScreenWidth() / 2 - 105, 460, 90, RAYWHITE);
+		DrawText(exitPtr, GetScreenWidth() / 2 - 90, 610, 90, RAYWHITE);
 		/*DrawRectanglePro(Rectangle{ 16,16,16,16 }, Vector2{ 8,8 }, 45.0f, GREEN);*/
 		EndDrawing();
 	}

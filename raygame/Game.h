@@ -78,6 +78,14 @@ public:
     /// <returns>The world matrix of the current scene.</returns>
     static MathLibrary::Matrix3* getWorld();
     void run();
+    /// <summary>
+    /// checks to see if the mouse is within the boundaries declared
+    /// </summary>
+    /// <param name="Lp">Farthest Left Point</param>
+    /// <param name="Tp">Top Most Point</param>
+    /// <param name="Rp">Farthest Right Point</param>
+    /// <param name="Bp">Bottom most Point</param>
+    static bool withinBounds(int Lp, int Tp, int Rp, int Bp);
 
 private:
 	void start();
