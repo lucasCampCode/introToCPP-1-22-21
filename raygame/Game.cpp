@@ -39,19 +39,23 @@ void Game::start()
 	SetTargetFPS(60);
 	while (m_gameStarted != true)
 	{
-		int goBack = 0;
+		int hiScoreBack = 0;
+		int loadBack = 0;
 		switch (startMenu())
 		{
 		case 1:
 			break;
 		case 2:
-			while (goBack != 1)
+			while (hiScoreBack != 1)
 			{
-				goBack = highScoreMenu();				
+				hiScoreBack = highScoreMenu();				
 			}
 			break;
 		case 3:
-			loadMenu();
+			while (loadBack != 1)
+			{
+				loadBack = loadMenu();
+			}			
 			break;
 		case 4:
 			setGameOver(true);
@@ -170,9 +174,13 @@ int Game::loadMenu()
 
 		DrawText(savesPtr, screenWidth / 2 - 245, 20, 90, RAYWHITE);
 		DrawText(backPtr, 45, screenHeight - 100, 90, RAYWHITE);
+		DrawText(cSSPtr, screenWidth - 390, screenHeight - 90, 40, RAYWHITE);
+
+		option = (withinBounds(10,screenHeight - 110, 410, screenHeight - 10) * 1) 
+			+ (withinBounds(screenWidth - 410, screenHeight - 110, screenWidth - 10, screenHeight - 10) * 2);
 		EndDrawing();
 	}
-	return 0;
+	return option;
 }
 
 void Game::update(float deltaTime)
