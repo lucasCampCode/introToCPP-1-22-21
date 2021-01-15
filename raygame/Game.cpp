@@ -20,7 +20,7 @@ bool Game::withinBounds(int Lp, int Tp, int Rp, int Bp)
 {
 	float mouseposx = GetMouseX();
 	float mouseposy = GetMouseY();
-	if (mouseposx >= Lp && mouseposx <= Rp && mouseposy >= Tp && mouseposy <= Bp)
+	if (mouseposx >= Lp && mouseposx <= Rp && mouseposy >= Tp && mouseposy <= Bp && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 		return true;
 	return false;
 }
@@ -49,8 +49,9 @@ void Game::startMenu()
 	char* loadPtr = load;
 	char exit[] = "Exit";
 	char* exitPtr = exit;
+	int option = 0;
 	//draws start window loop
-	while (!IsMouseButtonDown(MOUSE_LEFT_BUTTON) || !withinBounds(GetScreenWidth() / 2 - 200, 150, GetScreenWidth() / 2 + 200, 250)) {
+	while (option == 0) {
 		BeginDrawing();
 		ClearBackground(BLACK);
 		DrawRectangle(GetScreenWidth() / 2 - 200, 150, 400, 100, GREEN);
@@ -63,6 +64,10 @@ void Game::startMenu()
 		DrawText(exitPtr, GetScreenWidth() / 2 - 90, 610, 90, RAYWHITE);
 		/*DrawRectanglePro(Rectangle{ 16,16,16,16 }, Vector2{ 8,8 }, 45.0f, GREEN);*/
 		EndDrawing();
+		option = withinBounds(GetScreenWidth() / 2 - 200, 150, GetScreenWidth() / 2 + 200, 250) //if in box Start, set option to 1
+			+ (withinBounds(GetScreenWidth() / 2 - 200, 300, GetScreenWidth() / 2 + 200, 400) * 2//if in box HighSchores, set option to 2
+				+ (withinBounds(GetScreenWidth() / 2 - 200, 450, GetScreenWidth() / 2 + 200, 550) * 3)//if in box Load, set option to 3
+				+ (withinBounds(GetScreenWidth() / 2 - 200, 600, GetScreenWidth() / 2 + 200, 700) * 4));
 	}
 }
 
