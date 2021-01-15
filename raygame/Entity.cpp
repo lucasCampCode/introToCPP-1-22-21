@@ -9,9 +9,9 @@ Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePa
 	m_damage = damage;
 }
 
-bool Entity::attack(Entity other)
+bool Entity::attack(Entity* other)
 {
-	other.takeDamage(m_damage);
+	other->takeDamage(m_damage);
 	return true;
 }
 
@@ -22,9 +22,13 @@ bool Entity::takeDamage(float totalDamage)
 }
 
 
+void Entity::onCollision(Actor* other)
+{
+	attack((Entity*)other);
+}
+
 void Entity::update(float deltaTime)
 {
-
 	Actor::update(deltaTime);
 }
 

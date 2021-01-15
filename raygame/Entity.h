@@ -8,9 +8,10 @@ public:
 private:
 	
 public:
-	virtual bool attack(Entity other);
+	virtual bool attack(Entity* other);
 	virtual bool takeDamage(float totalDamage);
 
+	void onCollision(Actor* other) override;
 	void update(float deltaTime) override;
 	void draw() override;
 private:
