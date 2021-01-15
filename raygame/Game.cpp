@@ -20,6 +20,7 @@ void Game::start()
 {
 	int screenWidth = 1024;
 	int screenHeight = 760;
+	
 
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
