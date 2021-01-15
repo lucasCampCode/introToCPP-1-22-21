@@ -2,6 +2,7 @@
 #include "raylib.h"
 
 bool Game::m_gameOver = false;
+bool Game::m_gameStarted = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
 int Game::m_currentSceneIndex = 0;
@@ -36,17 +37,27 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	SetTargetFPS(60);
-	switch (startMenu())
+	while (m_gameStarted != true)
 	{
-	case 1:
-		return;
-	case 2:
-		highScoreMenu();
-	case 3:
-		return;
-	case 4:
-		setGameOver(true);
+		int goBack = 0;
+		switch (startMenu())
+		{
+		case 1:
+			break;
+		case 2:
+			while (goBack != 1)
+			{
+				goBack = highScoreMenu();
+			}
+			break;
+		case 3:
+			break;
+		case 4:
+			setGameOver(true);
+			return;
+		}
 	}
+	
 }
 
 int Game::startMenu()

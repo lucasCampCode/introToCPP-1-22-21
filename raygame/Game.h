@@ -98,6 +98,7 @@ private:
 private:
     Camera2D* m_camera;
     static bool m_gameOver;
+    static bool m_gameStarted;
 	static Scene** m_scenes;
     static int m_sceneCount;
     static int m_currentSceneIndex;
