@@ -47,10 +47,11 @@ void Game::start()
 		case 2:
 			while (goBack != 1)
 			{
-				goBack = highScoreMenu();
+				goBack = highScoreMenu();				
 			}
 			break;
 		case 3:
+			loadMenu();
 			break;
 		case 4:
 			setGameOver(true);
@@ -133,6 +134,45 @@ int Game::highScoreMenu()
 			+ (withinBounds(screenWidth - 300, screenHeight - 100, screenWidth - 10, screenHeight - 30) * 2); // if in box Clear Saves, set option to 2
 	}
 	return option;
+}
+
+int Game::loadMenu()
+{
+	int screenWidth = 1024;
+	int screenHeight = 760;
+	int option = 0;
+	char saves[] = "Save Files";
+	char* savesPtr = saves;
+	char back[] = "Return";
+	char* backPtr = back;
+	char clearSaveSlot[] = "Clear SaveSlot";
+	char* cSSPtr = clearSaveSlot;
+	while (option == 0)
+	{
+		BeginDrawing();
+		ClearBackground(BLACK);
+
+		DrawRectangle(screenWidth / 2 - 300, 5, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 145, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 265, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 385, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 505, 600, 100, RAYWHITE);
+		DrawRectangle(10, screenHeight - 110, 400, 100, RAYWHITE);
+		DrawRectangle(screenWidth - 410, screenHeight - 110, 400, 100, RAYWHITE);
+
+		DrawRectangle(screenWidth / 2 - 295, 10, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 150, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 270, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 390, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 510, 590, 90, BLACK);
+		DrawRectangle(15, screenHeight - 105, 390, 90, BLACK);
+		DrawRectangle(screenWidth - 405, screenHeight - 105, 390, 90, BLACK);
+
+		DrawText(savesPtr, screenWidth / 2 - 245, 20, 90, RAYWHITE);
+		DrawText(backPtr, 45, screenHeight - 100, 90, RAYWHITE);
+		EndDrawing();
+	}
+	return 0;
 }
 
 void Game::update(float deltaTime)

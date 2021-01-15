@@ -91,6 +91,7 @@ private:
 	void start();
     int startMenu();
     int highScoreMenu();
+    int loadMenu();
 	void update(float delaTime);
 	void draw();
 	void end();
