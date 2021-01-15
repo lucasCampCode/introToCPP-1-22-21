@@ -1,6 +1,9 @@
 #include "Entity.h"
+#include "Game.h"
+#include "raylib.h"
 
-Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed,float health, float damage) : Actor(x, y, collisionRadius, spriteFilePath, maxSpeed)
+Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage)
+	: Actor(x, y, collisionRadius, spriteFilePath, maxSpeed)
 {
 	m_health = health;
 	m_damage = damage;
@@ -18,7 +21,13 @@ bool Entity::takeDamage(float totalDamage)
 	return true;
 }
 
+
 void Entity::update(float deltaTime)
 {
 
+	Actor::update(deltaTime);
+}
+
+void Entity::draw()
+{
 }

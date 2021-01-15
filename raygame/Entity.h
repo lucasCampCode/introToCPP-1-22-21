@@ -8,10 +8,11 @@ public:
 private:
 	
 public:
-	bool attack(Entity other);
+	virtual bool attack(Entity other);
 	virtual bool takeDamage(float totalDamage);
 
 	void update(float deltaTime) override;
+	void draw() override;
 private:
 	bool m_isColliding = false;
 	float m_health;
