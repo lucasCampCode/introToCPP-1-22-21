@@ -39,8 +39,11 @@ void Game::start()
 	switch (startMenu())
 	{
 	case 1:
+		return;
 	case 2:
+		highScoreMenu();
 	case 3:
+		return;
 	case 4:
 		setGameOver(true);
 	}
@@ -56,6 +59,8 @@ int Game::startMenu()
 	char* loadPtr = load;
 	char exit[] = "Exit";
 	char* exitPtr = exit;
+	int screenWidth = 1024;
+	int screenHeight = 760;
 	int option = 0;
 	//draws start window loop
 	while (option == 0) {
@@ -63,15 +68,15 @@ int Game::startMenu()
 		//clears screen and sets background to BLACK
 		ClearBackground(BLACK);
 		//Draws Rectangles in order from top to bottom of screen following paramaters(posX,posY,Length,Height)
-		DrawRectangle(GetScreenWidth() / 2 - 200, 150, 400, 100, GREEN);
-		DrawRectangle(GetScreenWidth() / 2 - 200, 300, 400, 100, ORANGE);
-		DrawRectangle(GetScreenWidth() / 2 - 200, 450, 400, 100, DARKBLUE);
-		DrawRectangle(GetScreenWidth() / 2 - 200, 600, 400, 100, RED);
+		DrawRectangle(312, 150, 400, 100, GREEN);
+		DrawRectangle(312, 300, 400, 100, ORANGE);
+		DrawRectangle(312, 450, 400, 100, DARKBLUE);
+		DrawRectangle(312, 600, 400, 100, RED);
 		//Draws Text Ontop of Rectangles in order from top to bottom of screen following paramaters(char *text,posX,posY,FontSize,Color)
-		DrawText(startPtr, GetScreenWidth() / 2 - 115, 160, 90, RAYWHITE);
-		DrawText(highScorePtr, GetScreenWidth() / 2 - 190, 315, 68, RAYWHITE);
-		DrawText(loadPtr, GetScreenWidth() / 2 - 105, 460, 90, RAYWHITE);
-		DrawText(exitPtr, GetScreenWidth() / 2 - 90, 610, 90, RAYWHITE);
+		DrawText(startPtr, (screenWidth / 2) - 115, 160, 90, RAYWHITE);
+		DrawText(highScorePtr,(screenWidth / 2) - 190, 315, 68, RAYWHITE);
+		DrawText(loadPtr, (screenWidth / 2) - 105, 460, 90, RAYWHITE);
+		DrawText(exitPtr, (screenWidth / 2) - 90, 610, 90, RAYWHITE);
 		//Updates Drawings to console
 		EndDrawing();
 		//Sets option which is the variable used for this containing while loop, used to leave current scene and go to new one.
@@ -85,7 +90,21 @@ int Game::startMenu()
 
 void Game::highScoreMenu()
 {
-
+	int screenWidth = 1024;
+	int screenHeight = 760;
+	char highScore[] = "HighScores";
+	char* highScorePtr = highScore;
+	while (!WindowShouldClose())
+	{
+		BeginDrawing();
+		ClearBackground(BLACK);
+		DrawRectangle(312,0,400,100,RAYWHITE);
+		DrawRectangle(317, 7, 390, 90, BLACK);
+		DrawRectangle(312, 110, 400, 625, RAYWHITE);
+		DrawRectangle(317, 115, 390, 615, BLACK);
+		DrawText(highScorePtr, (screenWidth / 2) - 190, 20, 68, RAYWHITE);
+		EndDrawing();
+	}
 }
 
 void Game::update(float deltaTime)
