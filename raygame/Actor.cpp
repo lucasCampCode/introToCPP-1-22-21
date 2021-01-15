@@ -37,6 +37,8 @@ Actor::~Actor()
     delete m_rotation;
     delete m_translation;
     delete m_scale;
+    delete[] m_children;
+    delete m_sprite;
 }
 
 MathLibrary::Vector2 Actor::getForward()
@@ -257,7 +259,7 @@ void Actor::update(float deltaTime)
         m_velocity = m_velocity.getNormalized() * m_maxSpeed;
 
     //Increase position by the current velocity
-    setLocalPosition(m_velocity * deltaTime);
+    setLocalPosition(getLocalPosition() + m_velocity * deltaTime);
 }
 
 void Actor::draw()
