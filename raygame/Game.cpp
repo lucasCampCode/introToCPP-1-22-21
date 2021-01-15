@@ -36,10 +36,17 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	SetTargetFPS(60);
-	startMenu();
+	switch (startMenu())
+	{
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+		setGameOver(true);
+	}
 }
 
-void Game::startMenu()
+int Game::startMenu()
 {
 	char start[] = "Start";
 	char* startPtr = start;
@@ -73,6 +80,12 @@ void Game::startMenu()
 				+ (withinBounds(GetScreenWidth() / 2 - 200, 450, GetScreenWidth() / 2 + 200, 550) * 3)//if in box Load, set option to 3
 				+ (withinBounds(GetScreenWidth() / 2 - 200, 600, GetScreenWidth() / 2 + 200, 700) * 4));//if in box Exit, set option to 4
 	}
+	return option;
+}
+
+void Game::highScoreMenu()
+{
+
 }
 
 void Game::update(float deltaTime)

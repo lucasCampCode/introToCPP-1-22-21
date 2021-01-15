@@ -89,7 +89,8 @@ public:
 
 private:
 	void start();
-    void startMenu();
+    int startMenu();
+    void highScoreMenu();
 	void update(float delaTime);
 	void draw();
 	void end();
