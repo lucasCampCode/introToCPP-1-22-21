@@ -88,23 +88,40 @@ int Game::startMenu()
 	return option;
 }
 
-void Game::highScoreMenu()
+int Game::highScoreMenu()
 {
 	int screenWidth = 1024;
 	int screenHeight = 760;
+	int option = 0;
 	char highScore[] = "HighScores";
 	char* highScorePtr = highScore;
-	while (!WindowShouldClose())
+	char back[] = "Return";
+	char* backPtr = back;
+	char clear[] = "ClearSaves";
+	char* clearPtr = clear;
+	while (option == 0)
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
-		DrawRectangle(312,0,400,100,RAYWHITE);
-		DrawRectangle(317, 7, 390, 90, BLACK);
+		//Underlay is white boxes
+		DrawRectangle(312, 0, 400, 100, RAYWHITE);
 		DrawRectangle(312, 110, 400, 625, RAYWHITE);
+		DrawRectangle(5, screenHeight - 105, 300, 80, RAYWHITE);
+		DrawRectangle(screenWidth - 305, screenHeight - 105, 300, 80, RAYWHITE);
+		//Overlay is the black boxes to make the white boxes appear as borders
+		DrawRectangle(317, 7, 390, 90, BLACK);
 		DrawRectangle(317, 115, 390, 615, BLACK);
+		DrawRectangle(10, screenHeight - 100, 290, 70, BLACK);
+		DrawRectangle(screenWidth - 300, screenHeight - 100, 290, 70, BLACK);
+		//Text is drawn last
 		DrawText(highScorePtr, (screenWidth / 2) - 190, 20, 68, RAYWHITE);
+		DrawText(backPtr, 15, screenHeight - 100, 80, RAYWHITE);
+		DrawText(clearPtr, screenWidth - 292, screenHeight - 90, 49, RAYWHITE);
 		EndDrawing();
+		option = (withinBounds(10, screenHeight - 100, 300, screenHeight - 30) * 1) //if in box Return, set option to 1
+			+ (withinBounds(screenWidth - 300, screenHeight - 100, screenWidth - 10, screenHeight - 30) * 2); // if in box Clear Saves, set option to 2
 	}
+	return option;
 }
 
 void Game::update(float deltaTime)
