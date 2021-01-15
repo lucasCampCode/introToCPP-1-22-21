@@ -53,21 +53,25 @@ void Game::startMenu()
 	//draws start window loop
 	while (option == 0) {
 		BeginDrawing();
+		//clears screen and sets background to BLACK
 		ClearBackground(BLACK);
+		//Draws Rectangles in order from top to bottom of screen following paramaters(posX,posY,Length,Height)
 		DrawRectangle(GetScreenWidth() / 2 - 200, 150, 400, 100, GREEN);
 		DrawRectangle(GetScreenWidth() / 2 - 200, 300, 400, 100, ORANGE);
 		DrawRectangle(GetScreenWidth() / 2 - 200, 450, 400, 100, DARKBLUE);
 		DrawRectangle(GetScreenWidth() / 2 - 200, 600, 400, 100, RED);
+		//Draws Text Ontop of Rectangles in order from top to bottom of screen following paramaters(char *text,posX,posY,FontSize,Color)
 		DrawText(startPtr, GetScreenWidth() / 2 - 115, 160, 90, RAYWHITE);
 		DrawText(highScorePtr, GetScreenWidth() / 2 - 190, 315, 68, RAYWHITE);
 		DrawText(loadPtr, GetScreenWidth() / 2 - 105, 460, 90, RAYWHITE);
 		DrawText(exitPtr, GetScreenWidth() / 2 - 90, 610, 90, RAYWHITE);
-		/*DrawRectanglePro(Rectangle{ 16,16,16,16 }, Vector2{ 8,8 }, 45.0f, GREEN);*/
+		//Updates Drawings to console
 		EndDrawing();
+		//Sets option which is the variable used for this containing while loop, used to leave current scene and go to new one.
 		option = withinBounds(GetScreenWidth() / 2 - 200, 150, GetScreenWidth() / 2 + 200, 250) //if in box Start, set option to 1
 			+ (withinBounds(GetScreenWidth() / 2 - 200, 300, GetScreenWidth() / 2 + 200, 400) * 2//if in box HighSchores, set option to 2
 				+ (withinBounds(GetScreenWidth() / 2 - 200, 450, GetScreenWidth() / 2 + 200, 550) * 3)//if in box Load, set option to 3
-				+ (withinBounds(GetScreenWidth() / 2 - 200, 600, GetScreenWidth() / 2 + 200, 700) * 4));
+				+ (withinBounds(GetScreenWidth() / 2 - 200, 600, GetScreenWidth() / 2 + 200, 700) * 4));//if in box Exit, set option to 4
 	}
 }
 
