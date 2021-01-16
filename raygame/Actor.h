@@ -2,6 +2,7 @@
 
 #include <Vector2.h>
 #include <Matrix3.h>
+#include <iostream>
 
 class Sprite;
 
@@ -193,7 +194,7 @@ protected:
     MathLibrary::Vector2 m_acceleration;
     float m_maxSpeed;
     char m_icon;
-
+    char m_tag[16];
 private:
     bool m_started;
     float m_collisionRadius;

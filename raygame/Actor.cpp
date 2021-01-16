@@ -18,16 +18,19 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     m_collisionRadius = collisionRadius;
     m_childCount = 0;
     m_maxSpeed = maxSpeed;
+    strncpy(m_tag, "Actor", 16);
 }
 
 Actor::Actor(float x, float y, float collisionRadius, Sprite* sprite, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = sprite;
+    strncpy(m_tag, "Actor", 16);
 }
 
 Actor::Actor(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = new Sprite(spriteFilePath);
+    strncpy(m_tag, "Actor", 16);
 }
 
 Actor::~Actor()
