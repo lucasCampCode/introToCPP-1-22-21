@@ -10,27 +10,28 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     m_localTransform = new MathLibrary::Matrix3();
     m_rotation = new MathLibrary::Matrix3();
     m_translation = new MathLibrary::Matrix3();
-    m_scale = new MathLibrary::Matrix3();
+    m_scale = new MathLibrary::Matrix3(); 
 
     m_icon = icon;
     setLocalPosition(MathLibrary::Vector2(x,y));
     m_velocity = MathLibrary::Vector2();
+    m_gravity = MathLibrary::Vector2(0,1);
     m_collisionRadius = collisionRadius;
     m_childCount = 0;
     m_maxSpeed = maxSpeed;
-    strncpy(m_tag, "Actor", 16);
+    strncpy(tag, "Actor", 16);
 }
 
 Actor::Actor(float x, float y, float collisionRadius, Sprite* sprite, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = sprite;
-    strncpy(m_tag, "Actor", 16);
+    strncpy(tag, "Actor", 16);
 }
 
 Actor::Actor(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = new Sprite(spriteFilePath);
-    strncpy(m_tag, "Actor", 16);
+    strncpy(tag, "Actor", 16);
 }
 
 Actor::~Actor()

@@ -3,7 +3,7 @@
 Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage)
 	: Entity(x, y, collisionRadius, spriteFilePath, maxSpeed, health, damage)
 {
-	strncpy(m_tag,"Player",16);
+	strncpy(tag,"Player",16);
 }
 
 void Player::onCollision(Actor* other)
