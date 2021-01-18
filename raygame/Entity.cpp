@@ -7,7 +7,7 @@ Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePa
 {
 	m_health = health;
 	m_damage = damage;
-	strncpy(tag, "Entity", 16);
+	strncpy_s(tag, "Entity", 16);
 }
 /// <summary>
 /// this instance of the entity attacks the other instance

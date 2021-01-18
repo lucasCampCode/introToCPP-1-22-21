@@ -41,6 +41,9 @@ public:
     /// <returns>A pointer to the actor that has been set as this actors parent.</returns>
     Actor* getParent() { return m_parent; }
 
+    const char* getTag() { return tag; }
+    void setTag(const char* value) { strncpy_s(tag, value, 16); }
+
     /// <summary>
     /// </summary>
     /// <returns>The current orientation of this actors z axis.</returns>
@@ -202,5 +205,6 @@ private:
     Actor* m_parent;
     int m_childCount;
     Sprite* m_sprite;
+public:
 };
 
