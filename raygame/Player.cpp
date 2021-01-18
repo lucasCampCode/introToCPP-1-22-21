@@ -10,7 +10,7 @@ Player::Player(float x, float y, float collisionRadius, const char* spriteFilePa
 void Player::onCollision(Actor* other)
 {
 	attack((Entity*)other);
-	if (getTag() == "ground")
+	if (other->getTag() == "ground")
 	{
 		setAcceleration(MathLibrary::Vector2(0, -1));
 	}
