@@ -195,7 +195,6 @@ protected:
     Actor** m_children;
     MathLibrary::Vector2 m_velocity;
     MathLibrary::Vector2 m_acceleration;
-    MathLibrary::Vector2 m_gravity;
     float m_maxSpeed;
     char m_icon;
     char tag[16];

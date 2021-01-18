@@ -28,6 +28,11 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	SetTargetFPS(60);
+	m_screen1 = new Scene();
+	m_player1 = new Player(10, 10, 5, " ", 10, 100, 10);
+	addScene(m_screen1);
+	m_screen1->addActor(m_player1);
+
 }
 
 void Game::update(float deltaTime)

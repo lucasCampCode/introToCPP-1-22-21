@@ -7,7 +7,12 @@ Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePa
 {
 	m_health = health;
 	m_damage = damage;
+	m_gravity = MathLibrary::Vector2(0, 1);
 	strncpy_s(tag, "Entity", 16);
+}
+Entity::~Entity()
+{
+	Actor::~Actor();
 }
 /// <summary>
 /// this instance of the entity attacks the other instance
@@ -42,5 +47,5 @@ void Entity::update(float deltaTime)
 
 void Entity::draw()
 {
-
+	Actor::draw();
 }
