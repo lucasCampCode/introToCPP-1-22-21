@@ -2,6 +2,7 @@
 #include "raylib.h"
 
 bool Game::m_gameOver = false;
+bool Game::m_gameStarted = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
 int Game::m_currentSceneIndex = 0;
@@ -14,6 +15,15 @@ Game::Game()
 	m_camera = new Camera2D();
 	m_currentSceneIndex = 0;
 	m_sceneCount = 0;
+}
+
+bool Game::withinBounds(int Lp, int Tp, int Rp, int Bp)
+{
+	float mouseposx = GetMouseX();
+	float mouseposy = GetMouseY();
+	if (mouseposx >= Lp && mouseposx <= Rp && mouseposy >= Tp && mouseposy <= Bp && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+		return true;
+	return false;
 }
 
 void Game::start()
@@ -33,6 +43,150 @@ void Game::start()
 	addScene(m_screen1);
 	m_screen1->addActor(m_player1);
 
+	while (m_gameStarted != true)
+	{
+		int hiScoreBack = 0;
+		int loadBack = 0;
+		switch (startMenu())
+		{
+		case 1:
+			break;
+		case 2:
+			while (hiScoreBack != 1)
+			{
+				hiScoreBack = highScoreMenu();				
+			}
+			break;
+		case 3:
+			while (loadBack != 1)
+			{
+				loadBack = loadMenu();
+			}			
+			break;
+		case 4:
+			setGameOver(true);
+			return;
+		}
+	}
+	
+}
+
+int Game::startMenu()
+{
+	char start[] = "Start";
+	char* startPtr = start;
+	char highScore[] = "HighScores";
+	char* highScorePtr = highScore;
+	char load[] = "Load";
+	char* loadPtr = load;
+	char exit[] = "Exit";
+	char* exitPtr = exit;
+	int screenWidth = 1024;
+	int screenHeight = 760;
+	int option = 0;
+	//draws start window loop
+	while (option == 0) {
+		BeginDrawing();
+		//clears screen and sets background to BLACK
+		ClearBackground(BLACK);
+		//Draws Rectangles in order from top to bottom of screen following paramaters(posX,posY,Length,Height)
+		DrawRectangle(312, 150, 400, 100, GREEN);
+		DrawRectangle(312, 300, 400, 100, ORANGE);
+		DrawRectangle(312, 450, 400, 100, DARKBLUE);
+		DrawRectangle(312, 600, 400, 100, RED);
+		//Draws Text Ontop of Rectangles in order from top to bottom of screen following paramaters(char *text,posX,posY,FontSize,Color)
+		DrawText(startPtr, (screenWidth / 2) - 115, 160, 90, RAYWHITE);
+		DrawText(highScorePtr,(screenWidth / 2) - 190, 315, 68, RAYWHITE);
+		DrawText(loadPtr, (screenWidth / 2) - 105, 460, 90, RAYWHITE);
+		DrawText(exitPtr, (screenWidth / 2) - 90, 610, 90, RAYWHITE);
+		//Updates Drawings to console
+		EndDrawing();
+		//Sets option which is the variable used for this containing while loop, used to leave current scene and go to new one.
+		option = withinBounds(GetScreenWidth() / 2 - 200, 150, GetScreenWidth() / 2 + 200, 250) //if in box Start, set option to 1
+			+ (withinBounds(GetScreenWidth() / 2 - 200, 300, GetScreenWidth() / 2 + 200, 400) * 2//if in box HighSchores, set option to 2
+				+ (withinBounds(GetScreenWidth() / 2 - 200, 450, GetScreenWidth() / 2 + 200, 550) * 3)//if in box Load, set option to 3
+				+ (withinBounds(GetScreenWidth() / 2 - 200, 600, GetScreenWidth() / 2 + 200, 700) * 4));//if in box Exit, set option to 4
+	}
+	return option;
+}
+
+int Game::highScoreMenu()
+{
+	int screenWidth = 1024;
+	int screenHeight = 760;
+	int option = 0;
+	char highScore[] = "HighScores";
+	char* highScorePtr = highScore;
+	char back[] = "Return";
+	char* backPtr = back;
+	char clear[] = "ClearSaves";
+	char* clearPtr = clear;
+	while (option == 0)
+	{
+		BeginDrawing();
+		ClearBackground(BLACK);
+		//Underlay is white boxes
+		DrawRectangle(312, 0, 400, 100, RAYWHITE);
+		DrawRectangle(312, 110, 400, 625, RAYWHITE);
+		DrawRectangle(5, screenHeight - 105, 300, 80, RAYWHITE);
+		DrawRectangle(screenWidth - 305, screenHeight - 105, 300, 80, RAYWHITE);
+		//Overlay is the black boxes to make the white boxes appear as borders
+		DrawRectangle(317, 7, 390, 90, BLACK);
+		DrawRectangle(317, 115, 390, 615, BLACK);
+		DrawRectangle(10, screenHeight - 100, 290, 70, BLACK);
+		DrawRectangle(screenWidth - 300, screenHeight - 100, 290, 70, BLACK);
+		//Text is drawn last
+		DrawText(highScorePtr, (screenWidth / 2) - 190, 20, 68, RAYWHITE);
+		DrawText(backPtr, 15, screenHeight - 100, 80, RAYWHITE);
+		DrawText(clearPtr, screenWidth - 292, screenHeight - 90, 49, RAYWHITE);
+		EndDrawing();
+		option = (withinBounds(10, screenHeight - 100, 300, screenHeight - 30) * 1) //if in box Return, set option to 1
+			+ (withinBounds(screenWidth - 300, screenHeight - 100, screenWidth - 10, screenHeight - 30) * 2); // if in box Clear Saves, set option to 2
+	}
+	return option;
+}
+
+int Game::loadMenu()
+{
+	int screenWidth = 1024;
+	int screenHeight = 760;
+	int option = 0;
+	char saves[] = "Save Files";
+	char* savesPtr = saves;
+	char back[] = "Return";
+	char* backPtr = back;
+	char clearSaveSlot[] = "Clear SaveSlot";
+	char* cSSPtr = clearSaveSlot;
+	while (option == 0)
+	{
+		BeginDrawing();
+		ClearBackground(BLACK);
+
+		DrawRectangle(screenWidth / 2 - 300, 5, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 145, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 265, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 385, 600, 100, RAYWHITE);
+		DrawRectangle(screenWidth / 2 - 300, 505, 600, 100, RAYWHITE);
+		DrawRectangle(10, screenHeight - 110, 400, 100, RAYWHITE);
+		DrawRectangle(screenWidth - 410, screenHeight - 110, 400, 100, RAYWHITE);
+
+		DrawRectangle(screenWidth / 2 - 295, 10, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 150, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 270, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 390, 590, 90, BLACK);
+		DrawRectangle(screenWidth / 2 - 295, 510, 590, 90, BLACK);
+		DrawRectangle(15, screenHeight - 105, 390, 90, BLACK);
+		DrawRectangle(screenWidth - 405, screenHeight - 105, 390, 90, BLACK);
+
+		DrawText(savesPtr, screenWidth / 2 - 245, 20, 90, RAYWHITE);
+		DrawText(backPtr, 45, screenHeight - 100, 90, RAYWHITE);
+		DrawText(cSSPtr, screenWidth - 390, screenHeight - 90, 40, RAYWHITE);
+
+		option = (withinBounds(10,screenHeight - 110, 410, screenHeight - 10) * 1) 
+			+ (withinBounds(screenWidth - 410, screenHeight - 110, screenWidth - 10, screenHeight - 10) * 2);
+		EndDrawing();
+	}
+	return option;
 }
 
 void Game::update(float deltaTime)
