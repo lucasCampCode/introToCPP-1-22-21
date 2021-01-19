@@ -30,7 +30,6 @@ void Game::start()
 {
 	int screenWidth = 1024;
 	int screenHeight = 760;
-	
 
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
@@ -39,9 +38,9 @@ void Game::start()
 
 	SetTargetFPS(60);
 	m_screen1 = new Scene();
+	m_screen2 = new Scene();
 	m_player1 = new Player(10, 10, 5, " ", 10, 100, 10);
 	addScene(m_screen1);
-	m_screen1->addActor(m_player1);
 
 	while (m_gameStarted != true)
 	{
@@ -50,25 +49,26 @@ void Game::start()
 		switch (startMenu())
 		{
 		case 1:
+			setCurrentScene(addScene(m_screen2));
 			break;
 		case 2:
 			while (hiScoreBack != 1)
 			{
-				hiScoreBack = highScoreMenu();				
+				hiScoreBack = highScoreMenu();
 			}
 			break;
 		case 3:
 			while (loadBack != 1)
 			{
 				loadBack = loadMenu();
-			}			
+			}
 			break;
 		case 4:
 			setGameOver(true);
 			return;
 		}
 	}
-	
+	m_screen2->addActor(m_player1);
 }
 
 int Game::startMenu()
@@ -96,7 +96,7 @@ int Game::startMenu()
 		DrawRectangle(312, 600, 400, 100, RED);
 		//Draws Text Ontop of Rectangles in order from top to bottom of screen following paramaters(char *text,posX,posY,FontSize,Color)
 		DrawText(startPtr, (screenWidth / 2) - 115, 160, 90, RAYWHITE);
-		DrawText(highScorePtr,(screenWidth / 2) - 190, 315, 68, RAYWHITE);
+		DrawText(highScorePtr, (screenWidth / 2) - 190, 315, 68, RAYWHITE);
 		DrawText(loadPtr, (screenWidth / 2) - 105, 460, 90, RAYWHITE);
 		DrawText(exitPtr, (screenWidth / 2) - 90, 610, 90, RAYWHITE);
 		//Updates Drawings to console
@@ -182,7 +182,7 @@ int Game::loadMenu()
 		DrawText(backPtr, 45, screenHeight - 100, 90, RAYWHITE);
 		DrawText(cSSPtr, screenWidth - 390, screenHeight - 90, 40, RAYWHITE);
 
-		option = (withinBounds(10,screenHeight - 110, 410, screenHeight - 10) * 1) 
+		option = (withinBounds(10, screenHeight - 110, 410, screenHeight - 10) * 1)
 			+ (withinBounds(screenWidth - 410, screenHeight - 110, screenWidth - 10, screenHeight - 10) * 2);
 		EndDrawing();
 	}

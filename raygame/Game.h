@@ -104,5 +104,6 @@ private:
     static int m_sceneCount;
     static int m_currentSceneIndex;
     Scene* m_screen1;
+    Scene* m_screen2;
     Player* m_player1;
 };
