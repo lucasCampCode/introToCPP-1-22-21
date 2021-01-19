@@ -2,6 +2,7 @@
 
 #include <Vector2.h>
 #include <Matrix3.h>
+#include <iostream>
 
 class Sprite;
 
@@ -39,6 +40,9 @@ public:
     /// </summary>
     /// <returns>A pointer to the actor that has been set as this actors parent.</returns>
     Actor* getParent() { return m_parent; }
+
+    const char* getTag() { return tag; }
+    void setTag(const char* value) { strncpy_s(tag, value, 16); }
 
     /// <summary>
     /// </summary>
@@ -193,12 +197,13 @@ protected:
     MathLibrary::Vector2 m_acceleration;
     float m_maxSpeed;
     char m_icon;
-
+    char tag[16];
 private:
     bool m_started;
     float m_collisionRadius;
     Actor* m_parent;
     int m_childCount;
     Sprite* m_sprite;
+public:
 };
 

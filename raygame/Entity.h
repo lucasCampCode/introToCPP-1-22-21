@@ -5,8 +5,7 @@ class Entity : public Actor
 public:
 	Entity() : Actor() {};
 	Entity(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage);
-private:
-	
+	~Entity();
 public:
 	virtual bool attack(Entity* other);
 	virtual bool takeDamage(float totalDamage);
@@ -14,6 +13,8 @@ public:
 	void onCollision(Actor* other) override;
 	void update(float deltaTime) override;
 	void draw() override;
+protected:
+	MathLibrary::Vector2 m_gravity;
 private:
 	bool m_isColliding = false;
 	float m_health;
