@@ -8,7 +8,7 @@ Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePa
 	m_health = health;
 	m_damage = damage;
 	m_gravity = MathLibrary::Vector2(0, 1);
-	strncpy_s(tag, "Entity", 16);
+	setTag("Entity");
 }
 Entity::~Entity()
 {
@@ -42,6 +42,7 @@ void Entity::onCollision(Actor* other)
 
 void Entity::update(float deltaTime)
 {
+
 	Actor::update(deltaTime);
 }
 

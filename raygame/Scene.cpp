@@ -100,6 +100,7 @@ bool Scene::removeActor(Actor* actor)
         }
         else
         {
+            delete m_actors[i];
             actorRemoved = true;
         }
     }

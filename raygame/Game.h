@@ -89,10 +89,10 @@ public:
 
 private:
 	void start();
-    int startMenu();
-    int highScoreMenu();
-    int loadMenu();
-	void update(float delaTime);
+    void initRecs();
+    void updateSceneButtons();
+    void drawScreenButtons();
+    void update(float delaTime);
 	void draw();
 	void end();
 
@@ -103,7 +103,18 @@ private:
 	static Scene** m_scenes;
     static int m_sceneCount;
     static int m_currentSceneIndex;
+
+private:
+    Rectangle m_startB;
+    Rectangle m_highScoreB;
+    Rectangle m_loadB;
+    Rectangle m_exitB;
+    Rectangle m_returnB;
+    
+    Scene* m_start;
+    Scene* m_highScore;
+    Scene* m_load;
     Scene* m_screen1;
-    Scene* m_screen2;
     Player* m_player1;
+
 };
