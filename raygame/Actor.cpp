@@ -15,7 +15,7 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     m_icon = icon;
     setLocalPosition(MathLibrary::Vector2(x,y));
     m_velocity = MathLibrary::Vector2();
-    m_collisionRadius = collisionRadius;
+    collisionRadius = collisionRadius;
     m_childCount = 0;
     m_maxSpeed = maxSpeed;
     strncpy_s(tag, "Actor", 16);
@@ -243,7 +243,7 @@ void Actor::lookAt(MathLibrary::Vector2 position)
 bool Actor::checkCollision(Actor* other)
 {
     float distance = (other->getWorldPosition() - getWorldPosition()).getMagnitude();
-    return distance <= m_collisionRadius + other->m_collisionRadius;
+    return distance <= collisionRadius + other->collisionRadius;
 }
 
 void Actor::onCollision(Actor* other)

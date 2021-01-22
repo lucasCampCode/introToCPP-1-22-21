@@ -159,7 +159,7 @@ public:
     /// </summary>
     /// <param name="other">The actor to check collision against.</param>
     /// <returns>Returns true if the distance between the two actors is less than their combined radii.</returns>
-    bool checkCollision(Actor* other);
+    virtual bool checkCollision(Actor* other);
 
     /// <summary>
     /// Called when a collision between this actor and another occurs. 
@@ -197,13 +197,13 @@ protected:
     MathLibrary::Vector2 m_acceleration;
     float m_maxSpeed;
     char m_icon;
-    char tag[16];
 private:
     bool m_started;
-    float m_collisionRadius;
     Actor* m_parent;
     int m_childCount;
     Sprite* m_sprite;
 public:
+    char tag[16];
+    float collisionRadius;
 };
 
