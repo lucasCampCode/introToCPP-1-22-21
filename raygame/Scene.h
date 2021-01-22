@@ -1,7 +1,5 @@
 #pragma once
 #include "Player.h"
-#include "Ground.h"
-#include "button.h"
 
 class Scene
 {

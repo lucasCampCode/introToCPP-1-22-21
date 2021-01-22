@@ -3,6 +3,7 @@
 #include <Vector2.h>
 #include <Matrix3.h>
 #include <iostream>
+#include <typeinfo>
 
 class Sprite;
 
@@ -213,6 +214,5 @@ private:
     Actor* m_parent;
     int m_childCount;
     Sprite* m_sprite;
-public:
 };
 

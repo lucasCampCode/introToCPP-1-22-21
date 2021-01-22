@@ -7,7 +7,7 @@ Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePa
 {
 	m_health = health;
 	m_damage = damage;
-	m_gravity = MathLibrary::Vector2(0, 5);
+	m_gravity = MathLibrary::Vector2(0, 1);
 	setTag("Entity");
 }
 Entity::~Entity()

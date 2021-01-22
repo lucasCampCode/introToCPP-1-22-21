@@ -41,100 +41,13 @@ void Game::start()
 	m_screen1 = new Scene();
 	m_highScore = new Scene();
 	m_load = new Scene();
-
-	m_block1 = new Ground(0, GetScreenHeight() - 100, 500, 100, " ");
-	m_player1 = new Player(10, 10, 5, " ", 10, 100, 10);
-	m_returnB = new Button();
+	m_player1 = new Player(10, 10, 5, "images\placeholder.jpg", 10, 100, 10);
 	setCurrentScene(addScene(m_start));//index 0
 	addScene(m_highScore);//index 1
 	addScene(m_load);//index 2
 	addScene(m_screen1);//index 3
-
-	startMenu();
-
 	m_screen1->addActor(m_player1);
-	m_screen1->addActor(m_block1);
 }
-
-void Game::startMenu()
-{
-	//initilizes buttons
-	m_startB = new Button(312, 150, 400, 100, GREEN, "Start", 90);
-	m_startB->offsetText(MathLibrary::Vector2(100, 0));
-	m_HighScoreB = new Button(312, 300, 400, 100, ORANGE, "HighScore", 70);
-	m_loadB = new Button(312, 450, 400, 100, DARKBLUE, "Load", 90);
-	m_exitB = new Button(312, 600, 400, 100, RED, "Exit", 90);
-	//adds buttons to scene
-	m_start->addActor(m_startB);
-	m_start->addActor(m_HighScoreB);
-	m_start->addActor(m_loadB);
-	m_start->addActor(m_exitB);
-		
-}
-
-int Game::highScoreMenu()
-{
-	int option = 0;
-	while (option == 0)
-	{
-		BeginDrawing();
-		ClearBackground(BLACK);
-		//Underlay is white boxes
-		DrawRectangle(312, 0, 400, 100, RAYWHITE);
-		DrawRectangle(312, 110, 400, 625, RAYWHITE);
-		DrawRectangle(5, GetScreenHeight() - 105, 300, 80, RAYWHITE);
-		DrawRectangle(GetScreenWidth() - 305, GetScreenHeight() - 105, 300, 80, RAYWHITE);
-		//Overlay is the black boxes to make the white boxes appear as borders
-		DrawRectangle(317, 7, 390, 90, BLACK);
-		DrawRectangle(317, 115, 390, 615, BLACK);
-		DrawRectangle(10, GetScreenHeight() - 100, 290, 70, BLACK);
-		DrawRectangle(GetScreenWidth() - 300, GetScreenHeight() - 100, 290, 70, BLACK);
-		//Text is drawn last
-		DrawText("HighScores", (GetScreenWidth() / 2) - 190, 20, 68, RAYWHITE);
-		DrawText("Return", 15, GetScreenHeight() - 100, 80, RAYWHITE);
-		DrawText("ClearSaves", GetScreenWidth() - 292, GetScreenHeight() - 90, 49, RAYWHITE);
-		EndDrawing();
-		option = (withinBounds(10, GetScreenHeight() - 100, 300, GetScreenHeight() - 30) * 1) //if in box Return, set option to 1
-			+ (withinBounds(GetScreenWidth() - 300, GetScreenHeight() - 100, GetScreenWidth() - 10, GetScreenHeight() - 30) * 2); // if in box Clear Saves, set option to 2
-	}
-	return option;
-}
-
-int Game::loadMenu()
-{
-	int option = 0;
-	while (option == 0)
-	{
-		BeginDrawing();
-		ClearBackground(BLACK);
-
-		DrawRectangle(GetScreenWidth() / 2 - 300, 5, 600, 100, RAYWHITE);
-		DrawRectangle(GetScreenWidth() / 2 - 300, 145, 600, 100, RAYWHITE);
-		DrawRectangle(GetScreenWidth() / 2 - 300, 265, 600, 100, RAYWHITE);
-		DrawRectangle(GetScreenWidth() / 2 - 300, 385, 600, 100, RAYWHITE);
-		DrawRectangle(GetScreenWidth() / 2 - 300, 505, 600, 100, RAYWHITE);
-		DrawRectangle(10, GetScreenHeight() - 110, 400, 100, RAYWHITE);
-		DrawRectangle(GetScreenWidth() - 410, GetScreenHeight() - 110, 400, 100, RAYWHITE);
-
-		DrawRectangle(GetScreenWidth() / 2 - 295, 10, 590, 90, BLACK);
-		DrawRectangle(GetScreenWidth() / 2 - 295, 150, 590, 90, BLACK);
-		DrawRectangle(GetScreenWidth() / 2 - 295, 270, 590, 90, BLACK);
-		DrawRectangle(GetScreenWidth() / 2 - 295, 390, 590, 90, BLACK);
-		DrawRectangle(GetScreenWidth() / 2 - 295, 510, 590, 90, BLACK);
-		DrawRectangle(15, GetScreenHeight() - 105, 390, 90, BLACK);
-		DrawRectangle(GetScreenWidth() - 405, GetScreenHeight() - 105, 390, 90, BLACK);
-
-		DrawText("Save Files", GetScreenWidth() / 2 - 245, 20, 90, RAYWHITE);
-		DrawText("Return", 45, GetScreenHeight() - 100, 90, RAYWHITE);
-		DrawText("Clear SaveSlot", GetScreenWidth() - 390, GetScreenHeight() - 90, 40, RAYWHITE);
-
-		option = (withinBounds(10, GetScreenHeight() - 110, 410, GetScreenHeight() - 10) * 1)
-			+ (withinBounds(GetScreenWidth() - 410, GetScreenHeight() - 110, GetScreenWidth() - 10, GetScreenHeight() - 10) * 2);
-		EndDrawing();
-	}
-	return option;
-}
-
 
 void Game::update(float deltaTime)
 {
@@ -143,16 +56,20 @@ void Game::update(float deltaTime)
 
 	m_scenes[m_currentSceneIndex]->update(deltaTime);
 
-	if (m_returnB->getButtonClicked())
-		setCurrentScene(0);
-	if (m_HighScoreB->getButtonClicked())
-		setCurrentScene(1);
-	if (m_loadB->getButtonClicked())
-		setCurrentScene(2);
-	if (m_startB->getButtonClicked())
-		setCurrentScene(3);
-	if (m_exitB->getButtonClicked())
-		setGameOver(true);
+	switch (m_currentSceneIndex)
+	{
+	case 0:
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
+	
 }
 
 void Game::draw()
@@ -164,6 +81,19 @@ void Game::draw()
 
 	m_scenes[m_currentSceneIndex]->draw();
 
+	switch (m_currentSceneIndex)
+	{
+	case 0:
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
 	EndMode2D();
 	EndDrawing();
 }

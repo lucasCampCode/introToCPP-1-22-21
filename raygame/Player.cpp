@@ -27,20 +27,14 @@ void Player::update(float deltaTime)
 	
 	Entity::update(deltaTime);
 
-	setAcceleration(m_gravity);
+	setAcceleration(getAcceleration() + m_gravity);
 
 	if (IsKeyPressed(KeyboardKey::KEY_SPACE))
 	{
-		setAcceleration(MathLibrary::Vector2(0, -10));
+		setAcceleration(MathLibrary::Vector2(0, -50));
 	}
 
 	setVelocity(MathLibrary::Vector2(xdirection, 0) * m_maxSpeed);
-	if (xdirection > 0)//direction manipulation
-	{
-		setForward(MathLibrary::Vector2(1, 0));
-	}
-	else
-		setForward(MathLibrary::Vector2(-1, 0));
 }
 
 void Player::draw()
