@@ -15,9 +15,8 @@ Player::~Player()
 
 void Player::onCollision(Actor* other)
 {
-	if (strcmp(other->getTag(), "Ground") == 0)
-	{
-		setAcceleration(MathLibrary::Vector2(0, -50));
+	if (typeid(*other) == typeid(Entity)) {
+		DrawText("hi there",300,50,20,WHITE);
 	}
 }
 

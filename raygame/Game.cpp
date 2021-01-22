@@ -30,7 +30,7 @@ void Game::start()
 {
 	int screenWidth = 1024;
 	int screenHeight = 760;
-
+	initRecs();
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
@@ -49,6 +49,93 @@ void Game::start()
 	m_screen1->addActor(m_player1);
 }
 
+void Game::initRecs()
+{
+	m_startB.x = 312;
+	m_startB.y = 150;
+	m_startB.width = 325;
+	m_startB.height = 80;
+
+	m_highScoreB.x = 312;
+	m_highScoreB.y = 300;
+	m_highScoreB.width = 325;
+	m_highScoreB.height = 80;
+
+	m_loadB.x = 312;
+	m_loadB.y = 450;
+	m_loadB.width = 325;
+	m_loadB.height = 80;
+
+	m_exitB.x = 312;
+	m_exitB.y = 600;
+	m_exitB.width = 325;
+	m_exitB.height = 80;
+
+	m_returnB.x = 0;
+	m_returnB.y = 660;
+	m_returnB.width = 325;
+	m_returnB.height = 80;
+}
+
+void Game::updateSceneButtons()
+{
+	
+	switch (m_currentSceneIndex)
+	{
+	case 0:
+		if(CheckCollisionPointRec(GetMousePosition(),m_startB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			setCurrentScene(3);
+		if (CheckCollisionPointRec(GetMousePosition(), m_highScoreB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			setCurrentScene(1);
+		if (CheckCollisionPointRec(GetMousePosition(), m_loadB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			setCurrentScene(2);
+		if (CheckCollisionPointRec(GetMousePosition(), m_exitB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			setGameOver(true);
+		break;
+	case 1:
+		if (CheckCollisionPointRec(GetMousePosition(), m_returnB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			setCurrentScene(0);
+		break;
+	case 2:
+		if (CheckCollisionPointRec(GetMousePosition(), m_returnB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			setCurrentScene(0);
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::drawScreenButtons()
+{
+	switch (m_currentSceneIndex)
+	{
+	case 0:
+		DrawRectangleRec(m_startB, GREEN);
+		DrawText("start", m_startB.x + 50, m_startB.y + 0, 80, WHITE);
+		DrawRectangleRec(m_highScoreB, ORANGE);
+		DrawText("HighScore", m_highScoreB.x + 0, m_highScoreB.y + 10, 63, WHITE);
+		DrawRectangleRec(m_loadB, DARKBLUE);
+		DrawText("Load", m_loadB.x + 55, m_loadB.y + 0, 80, WHITE);
+		DrawRectangleRec(m_exitB, RED);
+		DrawText("exit", m_exitB.x + 60, m_exitB.y + 0, 80, WHITE);
+		break;
+	case 1:
+		DrawRectangleLinesEx(m_returnB, 4, WHITE);
+		DrawText("return", m_returnB.x + 20, m_returnB.y + 0, 80, WHITE);
+		break;
+	case 2:
+		DrawRectangleLinesEx(m_returnB, 4, WHITE);
+		DrawText("return", m_returnB.x + 20, m_returnB.y + 0, 80, WHITE);
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
+}
+
 void Game::update(float deltaTime)
 {
 	if (!m_scenes[m_currentSceneIndex]->getStarted())
@@ -56,19 +143,8 @@ void Game::update(float deltaTime)
 
 	m_scenes[m_currentSceneIndex]->update(deltaTime);
 
-	switch (m_currentSceneIndex)
-	{
-	case 0:
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	default:
-		break;
-	}
+	updateSceneButtons();
+	
 	
 }
 
@@ -80,20 +156,8 @@ void Game::draw()
 	ClearBackground(BLACK);
 
 	m_scenes[m_currentSceneIndex]->draw();
-
-	switch (m_currentSceneIndex)
-	{
-	case 0:
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	default:
-		break;
-	}
+	drawScreenButtons();
+	
 	EndMode2D();
 	EndDrawing();
 }
