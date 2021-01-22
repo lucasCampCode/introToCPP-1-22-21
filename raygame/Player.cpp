@@ -4,7 +4,7 @@
 Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage)
 	: Entity(x, y, collisionRadius, spriteFilePath, maxSpeed, health, damage)
 {
-	strncpy_s(tag, "Player", 16);
+	setTag("Player");
 }
 
 Player::~Player()

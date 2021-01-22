@@ -41,8 +41,17 @@ public:
     /// <returns>A pointer to the actor that has been set as this actors parent.</returns>
     Actor* getParent() { return m_parent; }
 
-    const char* getTag() { return tag; }
-    void setTag(const char* value) { strncpy_s(tag, value, 16); }
+    const char* getTag() { return m_tag; }
+    void setTag(const char* value) { strncpy_s(m_tag, value, 16); }
+
+    /// <summary>
+    /// </summary>
+    /// <returns>returns a value for collision radius</returns>
+    float getCollisionRadius() { return m_collisionRadius; }
+    /// <summary>
+    /// </summary>
+    /// <param name="value">sets a value for collision radius</param>
+    void setCollisionRadius(float value) { m_collisionRadius = value; }
 
     /// <summary>
     /// </summary>
@@ -198,12 +207,12 @@ protected:
     float m_maxSpeed;
     char m_icon;
 private:
+    float m_collisionRadius;
+    char m_tag[16];
     bool m_started;
     Actor* m_parent;
     int m_childCount;
     Sprite* m_sprite;
 public:
-    char tag[16];
-    float collisionRadius;
 };
 

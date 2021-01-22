@@ -92,7 +92,7 @@ private:
     int startMenu();
     int highScoreMenu();
     int loadMenu();
-	void update(float delaTime);
+    void update(float delaTime);
 	void draw();
 	void end();
 
@@ -103,7 +103,23 @@ private:
 	static Scene** m_scenes;
     static int m_sceneCount;
     static int m_currentSceneIndex;
+
+private:
+    Button* m_returnB;
+
+    Scene* m_start;
+    Button* m_startB;
+    Button* m_HighScoreB;
+    Button* m_loadB;
+    Button* m_exitB;
+
+    Scene* m_highScore;
+
+    Scene* m_load;
+
     Scene* m_screen1;
-    Scene* m_screen2;
+    Ground* m_block1;
     Player* m_player1;
+
+    Scene* m_exit;
 };

@@ -1,14 +1,14 @@
 #include "Entity.h"
 #include "raylib.h"
-class Ground : public Entity
+class Ground : public Actor
 {
 public:
-	Ground() : Entity() {};
-	Ground(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage);
+	Ground() : Actor() {};
+	Ground(float x, float y, const char* spriteFilePath, float width, float height);
 	~Ground();
 	bool checkCollision(Actor* other) override;
 	void onCollision(Actor* other) override;
-	void setCollidingbox(float width,float hieght);
+	void setCollidingbox(float width,float height);
 private:
 	Rectangle m_CollisionBox;
 };

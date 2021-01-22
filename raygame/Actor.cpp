@@ -18,19 +18,19 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     collisionRadius = collisionRadius;
     m_childCount = 0;
     m_maxSpeed = maxSpeed;
-    strncpy_s(tag, "Actor", 16);
+    setTag("Actor");
 }
 
 Actor::Actor(float x, float y, float collisionRadius, Sprite* sprite, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = sprite;
-    strncpy_s(tag, "Actor", 16);
+    setTag("Actor");
 }
 
 Actor::Actor(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed = 1) : Actor(x, y, collisionRadius, ' ', maxSpeed)
 {
     m_sprite = new Sprite(spriteFilePath);
-    strncpy_s(tag, "Actor", 16);
+    setTag("Actor");
 }
 
 Actor::~Actor()
@@ -243,7 +243,7 @@ void Actor::lookAt(MathLibrary::Vector2 position)
 bool Actor::checkCollision(Actor* other)
 {
     float distance = (other->getWorldPosition() - getWorldPosition()).getMagnitude();
-    return distance <= collisionRadius + other->collisionRadius;
+    return distance <= m_collisionRadius + other->m_collisionRadius;
 }
 
 void Actor::onCollision(Actor* other)
