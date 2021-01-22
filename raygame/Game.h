@@ -89,7 +89,7 @@ public:
 
 private:
 	void start();
-    int startMenu();
+    void startMenu();
     int highScoreMenu();
     int loadMenu();
     void update(float delaTime);
@@ -114,12 +114,12 @@ private:
     Button* m_exitB;
 
     Scene* m_highScore;
+    Button* m_clearScores;
 
     Scene* m_load;
+    Button* m_clearSaves;
 
     Scene* m_screen1;
     Ground* m_block1;
     Player* m_player1;
-
-    Scene* m_exit;
 };

@@ -7,12 +7,15 @@ class Button :
 public:
     Button() : Actor() {};
     Button(float x, float y, float width, float height, Color color, const char* text, int fontSize);
-    Button(float x, float y, float width, float height,  Color color, const char* text,int fontSize, int sceneIndex);
+    bool getButtonClicked() { return buttonClicked; }
+    void offsetText(MathLibrary::Vector2 value) { offsetTextX = value.x; offSetTextY = value.y; }
     void update(float deltaTime) override;
     void draw() override;
 private:
-    int m_sceneIndex;
+    bool buttonClicked;
     int m_fontSize;
+    int offsetTextX;
+    int offSetTextY;
     Rectangle m_box;
     Color m_color;
     const char* m_text;

@@ -13,24 +13,34 @@ Player::~Player()
 }
 
 
-void Player::update(float deltaTime)
+void Player::onCollision(Actor* other)
 {
-	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
-	if (IsKeyPressed(KeyboardKey::KEY_SPACE))
+	if (strcmp(other->getTag(), "Ground") == 0)
 	{
 		setAcceleration(MathLibrary::Vector2(0, -50));
 	}
-	if (xdirection > 0)
+}
+
+void Player::update(float deltaTime)
+{
+	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
+	
+	Entity::update(deltaTime);
+
+	setAcceleration(m_gravity);
+
+	if (IsKeyPressed(KeyboardKey::KEY_SPACE))
+	{
+		setAcceleration(MathLibrary::Vector2(0, -10));
+	}
+
+	setVelocity(MathLibrary::Vector2(xdirection, 0) * m_maxSpeed);
+	if (xdirection > 0)//direction manipulation
 	{
 		setForward(MathLibrary::Vector2(1, 0));
 	}
 	else
 		setForward(MathLibrary::Vector2(-1, 0));
-
-	setAcceleration(getAcceleration() + m_gravity);
-	setVelocity(MathLibrary::Vector2(xdirection, 0) * m_maxSpeed);
-
-	Entity::update(deltaTime);
 }
 
 void Player::draw()

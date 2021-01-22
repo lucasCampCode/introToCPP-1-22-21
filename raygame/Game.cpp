@@ -39,35 +39,31 @@ void Game::start()
 	SetTargetFPS(60);
 	m_start = new Scene();
 	m_screen1 = new Scene();
-	m_block1 = new Ground(GetScreenWidth() / 2, GetScreenHeight() - 100, " ", 500, 100);
+	m_highScore = new Scene();
+	m_load = new Scene();
+
+	m_block1 = new Ground(0, GetScreenHeight() - 100, 500, 100, " ");
 	m_player1 = new Player(10, 10, 5, " ", 10, 100, 10);
 	m_returnB = new Button();
-	addScene(m_start);
+	setCurrentScene(addScene(m_start));//index 0
+	addScene(m_highScore);//index 1
+	addScene(m_load);//index 2
+	addScene(m_screen1);//index 3
 
-	int hiScoreBack = 0;
-	int loadBack = 0;
 	startMenu();
-		while (hiScoreBack != 1)
-		{
-			hiScoreBack = highScoreMenu();
-		}
-		while (loadBack != 1)
-		{
-			loadBack = loadMenu();
-		}
-	
 
 	m_screen1->addActor(m_player1);
 	m_screen1->addActor(m_block1);
 }
 
-int Game::startMenu()
+void Game::startMenu()
 {
 	//initilizes buttons
-	m_startB = new Button(312, 150, 400, 100, GREEN, "Start", 90, addScene(m_screen1));
-	m_HighScoreB = new Button(312, 300, 400, 100, ORANGE, "HighScore", 90, addScene(m_highScore));
-	m_loadB = new Button(312, 450, 400, 100, DARKBLUE, "Load", 90, addScene(m_load));
-	m_exitB = new Button(312, 600, 400, 100, RED, "Exit", 90, addScene(m_exit));
+	m_startB = new Button(312, 150, 400, 100, GREEN, "Start", 90);
+	m_startB->offsetText(MathLibrary::Vector2(100, 0));
+	m_HighScoreB = new Button(312, 300, 400, 100, ORANGE, "HighScore", 70);
+	m_loadB = new Button(312, 450, 400, 100, DARKBLUE, "Load", 90);
+	m_exitB = new Button(312, 600, 400, 100, RED, "Exit", 90);
 	//adds buttons to scene
 	m_start->addActor(m_startB);
 	m_start->addActor(m_HighScoreB);
@@ -129,7 +125,7 @@ int Game::loadMenu()
 		DrawRectangle(GetScreenWidth() - 405, GetScreenHeight() - 105, 390, 90, BLACK);
 
 		DrawText("Save Files", GetScreenWidth() / 2 - 245, 20, 90, RAYWHITE);
-		DrawText("Return", 45, GetScreenWidth() - 100, 90, RAYWHITE);
+		DrawText("Return", 45, GetScreenHeight() - 100, 90, RAYWHITE);
 		DrawText("Clear SaveSlot", GetScreenWidth() - 390, GetScreenHeight() - 90, 40, RAYWHITE);
 
 		option = (withinBounds(10, GetScreenHeight() - 110, 410, GetScreenHeight() - 10) * 1)
@@ -142,10 +138,21 @@ int Game::loadMenu()
 
 void Game::update(float deltaTime)
 {
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->update(deltaTime);
-	}
+	if (!m_scenes[m_currentSceneIndex]->getStarted())
+		m_scenes[m_currentSceneIndex]->start();
+
+	m_scenes[m_currentSceneIndex]->update(deltaTime);
+
+	if (m_returnB->getButtonClicked())
+		setCurrentScene(0);
+	if (m_HighScoreB->getButtonClicked())
+		setCurrentScene(1);
+	if (m_loadB->getButtonClicked())
+		setCurrentScene(2);
+	if (m_startB->getButtonClicked())
+		setCurrentScene(3);
+	if (m_exitB->getButtonClicked())
+		setGameOver(true);
 }
 
 void Game::draw()
@@ -155,10 +162,7 @@ void Game::draw()
 	BeginMode2D(*m_camera);
 	ClearBackground(BLACK);
 
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->draw();
-	}
+	m_scenes[m_currentSceneIndex]->draw();
 
 	EndMode2D();
 	EndDrawing();
