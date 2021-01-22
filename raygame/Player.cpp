@@ -4,7 +4,7 @@
 Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage)
 	: Entity(x, y, collisionRadius, spriteFilePath, maxSpeed, health, damage)
 {
-	strncpy_s(tag, "Player", 16);
+	setTag("Player");
 }
 
 Player::~Player()
@@ -13,24 +13,27 @@ Player::~Player()
 }
 
 
+void Player::onCollision(Actor* other)
+{
+	if (typeid(*other) == typeid(Entity)) {
+		DrawText("hi there",300,50,20,WHITE);
+	}
+}
+
 void Player::update(float deltaTime)
 {
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
+	
+	Entity::update(deltaTime);
+
+	setAcceleration(getAcceleration() + m_gravity);
+
 	if (IsKeyPressed(KeyboardKey::KEY_SPACE))
 	{
 		setAcceleration(MathLibrary::Vector2(0, -50));
 	}
-	if (xdirection > 0)
-	{
-		setForward(MathLibrary::Vector2(1, 0));
-	}
-	else
-		setForward(MathLibrary::Vector2(-1, 0));
 
-	setAcceleration(getAcceleration() + m_gravity);
 	setVelocity(MathLibrary::Vector2(xdirection, 0) * m_maxSpeed);
-
-	Entity::update(deltaTime);
 }
 
 void Player::draw()

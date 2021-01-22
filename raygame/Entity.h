@@ -16,7 +16,6 @@ public:
 protected:
 	MathLibrary::Vector2 m_gravity;
 private:
-	bool m_isColliding = false;
 	float m_health;
 	float m_damage;
 };
