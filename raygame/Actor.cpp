@@ -15,7 +15,7 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     m_icon = icon;
     setLocalPosition(MathLibrary::Vector2(x,y));
     m_velocity = MathLibrary::Vector2();
-    collisionRadius = collisionRadius;
+    m_collisionRadius = collisionRadius;
     m_childCount = 0;
     m_maxSpeed = maxSpeed;
     setTag("Actor");
@@ -267,13 +267,13 @@ void Actor::update(float deltaTime)
 
 void Actor::draw()
 {
-    DrawCircle(getWorldPosition().x * 32, getWorldPosition().y * 32, 50, BLUE);
+    DrawCircle(getWorldPosition().x*32, getWorldPosition().y*32, m_collisionRadius*32, BLUE);
     //Draws the actor and a line indicating it facing to the raylib window
     DrawLine(
-        (int)(getWorldPosition().x * 32),
-        (int)(getWorldPosition().y * 32),
-        (int)((getWorldPosition().x + getForward().x) * 32),
-        (int)((getWorldPosition().y + getForward().y) * 32),
+        (int)(getWorldPosition().x*32),
+        (int)(getWorldPosition().y*32),
+        (int)((getWorldPosition().x + getForward().x)*32),
+        (int)((getWorldPosition().y + getForward().y)*32),
         WHITE
     );
 
