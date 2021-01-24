@@ -116,5 +116,6 @@ private:
     Scene* m_load;
     Scene* m_screen1;
     Player* m_player1;
+    Ground* m_block;
 
 };

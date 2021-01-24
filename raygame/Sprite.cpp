@@ -51,12 +51,12 @@ void Sprite::draw(MathLibrary::Matrix3 transform)
 
     //Find the transform rotation in radians 
     float rotation = atan2(transform.m21, transform.m11);
-    RAYLIB_H::Vector2 rayPos = { pos.x*32, pos.y*32 };
+    RAYLIB_H::Vector2 rayPos = { pos.x*32, pos.y*32};
 
     //Draw the sprite
     RAYLIB_H::DrawTextureEx(*m_texture, rayPos,
         (float)(rotation * 180.0f / PI), 32, WHITE);
 
-    DrawRectangleLines(rayPos.x, rayPos.y, getWidth() * 32, getHeight() * 32, RED);
+    DrawRectangleLines(rayPos.x, rayPos.y, getWidth()*32, getHeight()*32, RED);
 }
 
