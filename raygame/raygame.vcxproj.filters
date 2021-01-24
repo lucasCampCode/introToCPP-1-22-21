@@ -60,5 +60,14 @@
     <Image Include="images\placeholder.jpg">
       <Filter>images</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\Desktop\Assets No Background\pizzaGuy\PizzaGuyNoPizza\PizzaGuyWalkRight(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\PizzaGuyWalkRight(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\PizzaGuyWalkRight(1).png">
+      <Filter>images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

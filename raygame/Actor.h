@@ -181,6 +181,9 @@ public:
     virtual void draw();
     virtual void debug();
     virtual void end();
+    virtual int changeSprite(const char* spritefilepath);
+    const char* sprites[3] = { "images/PizzaGuyWalkRight(1).png",
+        "images/PizzaGuyWalkRight(2).png","images/PizzaGuyWalkRight(3).png", };
 
 protected:
     /// <summary>

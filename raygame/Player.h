@@ -9,7 +9,14 @@ public:
 	~Player();
 public: 
 	void onCollision(Actor* other) override;
+	void start() override;
 	void update(float deltaTime) override;
 	void draw() override;
+	void end() override;
+private:
+	int m_currentSprite = 0;
+	float m_spriteTimer;
+	bool m_spriteTimerStarted;
+	void m_setTimerGoing(bool value);
 };
 

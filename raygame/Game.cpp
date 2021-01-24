@@ -41,7 +41,7 @@ void Game::start()
 	m_screen1 = new Scene();
 	m_highScore = new Scene();
 	m_load = new Scene();
-	m_player1 = new Player(10, 10, 5, "images\placeholder.jpg", 10, 100, 10);
+	m_player1 = new Player(10, 10, 5, "images/PizzaGuyWalkRight(2).png", 10, 100, 10);
 	setCurrentScene(addScene(m_start));//index 0
 	addScene(m_highScore);//index 1
 	addScene(m_load);//index 2
@@ -75,6 +75,11 @@ void Game::initRecs()
 	m_returnB.y = 660;
 	m_returnB.width = 325;
 	m_returnB.height = 80;
+
+	m_tableB.x = 430;
+	m_tableB.y = 5;
+	m_tableB.width = 500;
+	m_tableB.height = 750;
 }
 
 void Game::updateSceneButtons()
@@ -124,6 +129,7 @@ void Game::drawScreenButtons()
 	case 1:
 		DrawRectangleLinesEx(m_returnB, 4, WHITE);
 		DrawText("return", m_returnB.x + 20, m_returnB.y + 0, 80, WHITE);
+		DrawRectangleLinesEx(m_tableB, 4, WHITE);
 		break;
 	case 2:
 		DrawRectangleLinesEx(m_returnB, 4, WHITE);

@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "raylib.h"
 #include "Sprite.h"
+#include <fstream>
 
 Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float maxSpeed = 1)
 {
@@ -267,7 +268,7 @@ void Actor::update(float deltaTime)
 
 void Actor::draw()
 {
-    DrawCircle(getWorldPosition().x * 32, getWorldPosition().y * 32, 50, BLUE);
+    /*DrawCircle(getWorldPosition().x * 32, getWorldPosition().y * 32, 50, BLUE);*/
     //Draws the actor and a line indicating it facing to the raylib window
     DrawLine(
         (int)(getWorldPosition().x * 32),
@@ -291,6 +292,23 @@ void Actor::end()
 {
     m_started = false;
 }
+
+int Actor::changeSprite(const char* spritefilepath)
+{
+    if()
+    std::fstream fileStream;
+    fileStream.open(spritefilepath, std::ios::_Nocreate);
+    if (fileStream.is_open())
+    {
+        m_sprite = new Sprite(spritefilepath);
+        fileStream.close();
+        return 1;
+    }
+    fileStream.close();
+    return 0;
+}
+
+
 
 void Actor::updateFacing()
 {
