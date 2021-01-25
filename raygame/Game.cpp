@@ -48,11 +48,6 @@ void Game::start()
 	addScene(m_load);//index 2
 	addScene(m_screen1);//index 3
 	m_screen1->addActor(m_player1);
-	for (int i = 0; i < 5; i++)
-	{
-		m_hearts[i] = new Actor(i + 1, 1, 0, "images/EmptyHeart.png", 0);
-		m_screen1->addActor(m_hearts[i]);
-	}
 }
 
 void Game::initRecs()
@@ -89,7 +84,7 @@ void Game::initRecs()
 
 	m_healthBar.x = 10;
 	m_healthBar.y = 10;
-	m_healthBar.width = 94;
+	m_healthBar.width = 100;
 	m_healthBar.height = 30;
 }
 
@@ -158,19 +153,8 @@ void Game::drawScreenButtons()
 
 void Game::drawHealthBar(int posX, int posY)
 {
-	DrawRectangleRec(m_healthBar, BLACK);
-	DrawRectangleLinesEx(m_healthBar, 4, WHITE);
-	if (*m_player1->m_oldHealthPtr != *m_player1->m_healthPtr)
-		for (int i = 0; i < 5; i++)
-		{
-			/*if (*m_player1->m_healthPtr = (i * 2) && m_hearts[i])
-				m_hearts[i]->changeSprite(m_heartSprites[2]);
-			else if (*m_player1->m_healthPtr < (i * 2))
-				m_hearts[i]->changeSprite(m_heartSprites[1]);
-			else if (*m_player1->m_healthPtr > (i * 2))
-				m_hearts[i]->changeSprite(m_heartSprites[2]);*/
-		}
-	*m_player1->m_oldHealthPtr = *m_player1->m_healthPtr;
+	DrawRectangleRec(m_healthBarHolder, BLACK);
+	DrawRectangleLinesEx(m_healthBarHolder, 4, WHITE);
 }
 
 void Game::update(float deltaTime)

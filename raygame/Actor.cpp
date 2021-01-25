@@ -299,7 +299,8 @@ int Actor::changeSprite(const char* spritefilepath)
     {
         delete m_sprite;
     }
-    m_sprite = new Sprite(spritefilepath);
+    if(m_sprite != new Sprite(spritefilepath))
+        m_sprite = new Sprite(spritefilepath);
     return 0;
 }
 

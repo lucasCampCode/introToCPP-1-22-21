@@ -122,10 +122,4 @@ private:
 
     Player* m_player1;
     Ground* m_block;
-    Actor* m_hearts[5];
-    const char* m_heartSprites[3] = {
-    "images/EmptyHeart.png",
-    "images/HalfHeart.png",
-    "images/FullHeart.png"
-    };
 };
