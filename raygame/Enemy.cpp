@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Player.h"
+#include "Game.h"
 Enemy::Enemy(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage)
 	: Entity(x,y,collisionRadius,spriteFilePath,maxSpeed,health,damage)
 {
@@ -32,11 +33,16 @@ void Enemy::update(float deltaTime)
 {
 	if (checkTargetInSight(1, 3)) 
 	{
-
+		setVelocity((m_target->getWorldPosition() - getWorldPosition()).getNormalized());
 	}
 	else
 	{
-
+		setVelocity(MathLibrary::Vector2(rand() % 3 - 2,rand() % 3 - 2));
 	}
-
+	Entity::update(deltaTime);
+	if (getHealth() <= 0)
+	{
+		Game::getCurrentScene()->removeActor(this);
+		delete this;
+	}
 }

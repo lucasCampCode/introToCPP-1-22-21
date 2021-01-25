@@ -42,7 +42,11 @@ void Game::start()
 	m_screen1 = new Scene();
 	m_world1 = new Actor(16, 12, 0, "images/firstMap.png", 0);
 	m_world1->scale(MathLibrary::Vector2(32, 24));
-
+	for (int i = 0; i < 20; i++)
+	{
+		m_enemies[i] = new Enemy(rand() % 30 + 1, rand() % 22 + 1, 0.8f, "images/PizzaGuyWalkRight(2).png", 10, 4, 1);
+		m_enemies[i]->scale(MathLibrary::Vector2(1.5f, 1.5f));
+	}
 	m_highScore = new Scene();
 	m_load = new Scene();
 	//player initilization
@@ -60,6 +64,7 @@ void Game::start()
 	addScene(m_screen1);//index 3
 	m_screen1->addActor(m_world1);
 	m_screen1->addActor(m_player1);
+
 	//m_screen1->addActor(m_wall1);
 	//m_screen1->addActor(m_wall2);
 	//m_screen1->addActor(m_wall3);
@@ -123,9 +128,20 @@ void Game::updateSceneButtons()
 			setCurrentScene(0);
 		break;
 	case 3:
+		
 		break;
 	default:
 		break;
+	}
+}
+
+void Game::startWave(float deltaTime)
+{
+	if ((m_timer+=deltaTime) > 10) 
+	{
+		if(m_enemyCount < 20)
+			m_screen1->addActor(m_enemies[m_enemyCount++]);
+		m_timer = 0;
 	}
 }
 
@@ -165,7 +181,9 @@ void Game::update(float deltaTime)
 		m_scenes[m_currentSceneIndex]->start();
 
 	m_scenes[m_currentSceneIndex]->update(deltaTime);
-
+	if (getCurrentSceneIndex() == 3) {
+		startWave(deltaTime);
+	}
 	updateSceneButtons();
 }
 

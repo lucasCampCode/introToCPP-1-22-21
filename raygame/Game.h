@@ -91,6 +91,7 @@ private:
 	void start();
     void initRecs();
     void updateSceneButtons();
+    void startWave(float deltaTime);
     void drawScreenButtons();
     void update(float delaTime);
 	void draw();
@@ -103,7 +104,8 @@ private:
 	static Scene** m_scenes;
     static int m_sceneCount;
     static int m_currentSceneIndex;
-
+    int m_enemyCount = 0;
+    float m_timer;
 private:
     Rectangle m_startB;
     Rectangle m_highScoreB;
@@ -119,8 +121,9 @@ private:
     Scene* m_screen1;
     Player* m_player1;
     Actor* m_world1;
-    Wall* m_wall1;
-    Wall* m_wall2;
-    Wall* m_wall3;
-    Wall* m_wall4;
+    Enemy* m_enemies[20];
+    //Wall* m_wall1;
+    //Wall* m_wall2;
+    //Wall* m_wall3;
+    //Wall* m_wall4;
 };

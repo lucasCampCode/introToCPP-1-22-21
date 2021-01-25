@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "Game.h"
 Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage)
 	: Entity(x, y, collisionRadius, spriteFilePath, maxSpeed, health, damage)
 {
@@ -48,17 +48,12 @@ void Player::update(float deltaTime)
 		}
 		*m_spriteTimerPointer = 0;
 	}	
-
+	
 	setVelocity(MathLibrary::Vector2(xdirection, ydirection) * m_maxSpeed);
-	//if player get near the windows border it gets pushed back
-	if (getWorldPosition().x > 31.5f)
-		setVelocity(MathLibrary::Vector2(-1, 0));
-	else if (getWorldPosition().x < 0.5f)
-		setVelocity(MathLibrary::Vector2(1, 0));
-	else if (getWorldPosition().y > 23.5f)
-		setVelocity(MathLibrary::Vector2(0, -1));
-	else if (getWorldPosition().y < 0.5f)
-		setVelocity(MathLibrary::Vector2(0, 1));
+	if(getHealth() < 0)
+	{
+		Game::setCurrentScene(4);
+	}
 }
 
 void Player::draw()

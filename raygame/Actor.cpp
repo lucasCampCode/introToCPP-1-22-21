@@ -253,6 +253,7 @@ void Actor::onCollision(Actor* other)
 
 void Actor::update(float deltaTime)
 {
+    
     *m_localTransform = *m_translation * *m_rotation * *m_scale;
 
     updateGlobalTransform();
@@ -262,8 +263,19 @@ void Actor::update(float deltaTime)
     if (m_velocity.getMagnitude() > m_maxSpeed)
         m_velocity = m_velocity.getNormalized() * m_maxSpeed;
 
+if(getWorldPosition().x > 31.5f)
+        setVelocity(MathLibrary::Vector2(-1, 0));
+    else if (getWorldPosition().x < 0.5f)
+        setVelocity(MathLibrary::Vector2(1, 0));
+    else if (getWorldPosition().y > 23.5f)
+        setVelocity(MathLibrary::Vector2(0, -1));
+    else if (getWorldPosition().y < 0.5f)
+        setVelocity(MathLibrary::Vector2(0, 1));
+
     //Increase position by the current velocity
     setLocalPosition(getLocalPosition() + m_velocity * deltaTime);
+
+    
 }
 
 void Actor::draw()
