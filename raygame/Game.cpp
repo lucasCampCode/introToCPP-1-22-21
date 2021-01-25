@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "raylib.h"
-#include "Sprite.h"
 
 bool Game::m_gameOver = false;
 bool Game::m_gameStarted = false;
@@ -105,16 +104,6 @@ void Game::initRecs()
 	m_tableB.y = 5;
 	m_tableB.width = 500;
 	m_tableB.height = 750;
-
-	m_healthBar.x = 10;
-	m_healthBar.y = 10;
-	m_healthBar.width = 100;
-	m_healthBar.height = 30;
-
-	m_healthBarHolder.x = 10;
-	m_healthBarHolder.y = 10;
-	m_healthBarHolder.width = 100;
-	m_healthBarHolder.height = 30;
 }
 
 void Game::updateSceneButtons()
@@ -123,11 +112,8 @@ void Game::updateSceneButtons()
 	switch (m_currentSceneIndex)
 	{
 	case 0:
-		if (CheckCollisionPointRec(GetMousePosition(), m_startB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-		{
-			m_showHealth = true;
+		if(CheckCollisionPointRec(GetMousePosition(),m_startB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			setCurrentScene(3);
-		}
 		if (CheckCollisionPointRec(GetMousePosition(), m_highScoreB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			setCurrentScene(1);
 		if (CheckCollisionPointRec(GetMousePosition(), m_loadB) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -195,22 +181,12 @@ void Game::drawScreenButtons()
 	}
 }
 
-void Game::drawHealthBar(int posX, int posY)
-{
-	float healthPercent = 0;
-	DrawRectangleRec(m_healthBarHolder, BLACK);
-	DrawRectangleRec(m_healthBar, RED);
-	DrawRectangleLinesEx(m_healthBarHolder, 4, WHITE);
-	m_healthBar.width = (100 * (*m_player1->m_healthPtr / static_cast<float>(10)));
-}
-
 void Game::update(float deltaTime)
 {
 	if (!m_scenes[m_currentSceneIndex]->getStarted())
 		m_scenes[m_currentSceneIndex]->start();
 
 	m_scenes[m_currentSceneIndex]->update(deltaTime);
-
 	if (getCurrentSceneIndex() == 3) {
 		startWave(deltaTime);
 	}
@@ -223,10 +199,10 @@ void Game::draw()
 
 	BeginMode2D(*m_camera);
 	ClearBackground(BLACK);
-	if (m_showHealth)
-		drawHealthBar(1, 1);
+
 	m_scenes[m_currentSceneIndex]->draw();
 	drawScreenButtons();
+	
 	EndMode2D();
 	EndDrawing();
 }
