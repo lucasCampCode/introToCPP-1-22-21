@@ -268,7 +268,7 @@ void Actor::update(float deltaTime)
 
 void Actor::draw()
 {
-    /*DrawCircle(getWorldPosition().x * 32, getWorldPosition().y * 32, 50, BLUE);*/
+    //DrawCircle(getWorldPosition().x * 32, getWorldPosition().y * 32, 50, BLUE);
     //Draws the actor and a line indicating it facing to the raylib window
     DrawLine(
         (int)(getWorldPosition().x * 32),
@@ -281,7 +281,7 @@ void Actor::draw()
     if (m_sprite)
         m_sprite->draw(*m_globalTransform);
     //Raylib.DrawCircleLines((int)(WorldPosition.X * 32), (int)(WorldPosition.Y * 32), _collisionRadius * 32, _rayColor);
-}
+} 
 
 void Actor::debug()
 {
@@ -295,20 +295,13 @@ void Actor::end()
 
 int Actor::changeSprite(const char* spritefilepath)
 {
-    if()
-    std::fstream fileStream;
-    fileStream.open(spritefilepath, std::ios::_Nocreate);
-    if (fileStream.is_open())
+    if(m_sprite)
     {
-        m_sprite = new Sprite(spritefilepath);
-        fileStream.close();
-        return 1;
+        delete m_sprite;
     }
-    fileStream.close();
+    m_sprite = new Sprite(spritefilepath);
     return 0;
 }
-
-
 
 void Actor::updateFacing()
 {

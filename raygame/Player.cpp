@@ -29,9 +29,13 @@ void Player::start()
 void Player::update(float deltaTime)
 {
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
-	if (m_spriteTimerStarted == true && ((m_spriteTimer += deltaTime) >= 5))
+	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15))
 	{
-		changeSprite(sprites[m_currentSprite + 1]);
+		if (xdirection > 0)
+			changeSprite(sprites[1][incrementSprite()]);
+		else if (xdirection < 0)
+			changeSprite(sprites[2][incrementSprite()]);
+		*m_spriteTimerPointer = 0;
 	}	
 
 	Entity::update(deltaTime);
@@ -60,4 +64,11 @@ void Player::end()
 void Player::m_setTimerGoing(bool value)
 {
 	m_spriteTimerStarted = value;
+}
+
+int Player::incrementSprite()
+{
+	m_currentSprite++;
+	if (m_currentSprite > 2) { m_currentSprite = 0; }
+	return m_currentSprite;
 }
