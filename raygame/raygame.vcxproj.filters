@@ -35,9 +35,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -56,9 +53,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -100,6 +94,42 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\PizzaGuyWalkLeft(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkAway(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkAway(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkAway(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkForward(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkForward(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkForward(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkLeft(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkLeft(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkLeft(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkRight(1).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkRight(2).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\pizzaGuyPizzaWalkRight(3).png">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>
