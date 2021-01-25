@@ -30,7 +30,7 @@ bool Game::withinBounds(int Lp, int Tp, int Rp, int Bp)
 void Game::start()
 {
 	int screenWidth = 1024;
-	int screenHeight = 760;
+	int screenHeight = 768;
 	initRecs();
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
@@ -39,15 +39,39 @@ void Game::start()
 
 	SetTargetFPS(60);
 	m_start = new Scene();
+	m_playerDeath = new Scene();
+	//first scene and background
 	m_screen1 = new Scene();
+	m_world1 = new Actor(16, 12, 0, "images/firstMap.png", 0);
+	m_world1->scale(MathLibrary::Vector2(32, 24));
+	for (int i = 0; i < 20; i++)
+	{
+		m_enemies[i] = new Enemy(rand() % 30 + 1, rand() % 22 + 1, 0.8f, "images/PizzaGuyWalkRight(2).png", 10, 4, 1);
+		m_enemies[i]->scale(MathLibrary::Vector2(1.5f, 1.5f));
+	}
 	m_highScore = new Scene();
 	m_load = new Scene();
-	m_player1 = new Player(10, 10, 5, "images/PizzaGuyWalkRight(2).png", 10, 100, 10);
+	//player initilization
+	m_player1 = new Player(16, 12,0.8f, "images/PizzaGuyWalkRight(2).png", 10, 10, 2);
+	m_player1->scale(MathLibrary::Vector2(1.5f,1.5f));
+
+	//m_wall1 = new Wall(6,4,12,8);
+	//m_wall2 = new Wall(26,4,12,8);
+	//m_wall3 = new Wall(6,19,12,7);
+	//m_wall4 = new Wall(26,19,12,7);
+	//addes scenes and actors to those scenes
 	setCurrentScene(addScene(m_start));//index 0
 	addScene(m_highScore);//index 1
 	addScene(m_load);//index 2
 	addScene(m_screen1);//index 3
+	addScene(m_playerDeath);//index 4
+	m_screen1->addActor(m_world1);
 	m_screen1->addActor(m_player1);
+
+	//m_screen1->addActor(m_wall1);
+	//m_screen1->addActor(m_wall2);
+	//m_screen1->addActor(m_wall3);
+	//m_screen1->addActor(m_wall4);
 }
 
 void Game::initRecs()
@@ -121,8 +145,21 @@ void Game::updateSceneButtons()
 		break;
 	case 3:
 		break;
+	case 4:
+		break;
 	default:
 		break;
+	}
+}
+
+void Game::startWave(float deltaTime)
+{
+	if ((m_timer+=deltaTime) > 5) 
+	{
+		if(m_enemyCount < 20)
+			m_screen1->addActor(m_enemies[m_enemyCount]);
+		m_enemyCount++;
+		m_timer = 0;
 	}
 }
 
@@ -151,6 +188,8 @@ void Game::drawScreenButtons()
 		break;
 	case 3:
 		break;
+	case 4:
+		break;
 	default:
 		break;
 	}
@@ -171,7 +210,10 @@ void Game::update(float deltaTime)
 		m_scenes[m_currentSceneIndex]->start();
 
 	m_scenes[m_currentSceneIndex]->update(deltaTime);
-	
+
+	if (getCurrentSceneIndex() == 3) {
+		startWave(deltaTime);
+	}
 	updateSceneButtons();
 }
 
