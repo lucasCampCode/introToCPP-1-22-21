@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "Sprite.h"
 class Camera2D;
 
 static class Game
@@ -88,20 +89,21 @@ public:
     static bool withinBounds(int Lp, int Tp, int Rp, int Bp);
 
 private:
-	void start();
+    void start();
     void initRecs();
     void updateSceneButtons();
     void startWave(float deltaTime);
     void drawScreenButtons();
+    void drawHealthBar(int posX, int posY);
     void update(float delaTime);
-	void draw();
-	void end();
-
+    void draw();
+    void end();
 private:
     Camera2D* m_camera;
     static bool m_gameOver;
     static bool m_gameStarted;
-	static Scene** m_scenes;
+    bool m_showHealth;
+    static Scene** m_scenes;
     static int m_sceneCount;
     static int m_currentSceneIndex;
     int m_enemyCount = 0;
@@ -113,13 +115,17 @@ private:
     Rectangle m_exitB;
     Rectangle m_returnB;
     Rectangle m_tableB;
-    
+    Rectangle m_healthBarHolder;
+    Rectangle m_healthBar;
+
     Scene* m_start;
     Scene* m_highScore;
     Scene* m_load;
 
     Scene* m_screen1;
+
     Player* m_player1;
+
     Actor* m_world1;
     Enemy* m_enemies[20];
     //Wall* m_wall1;
@@ -128,3 +134,4 @@ private:
     //Wall* m_wall4;
     Scene* m_playerDeath;
 };
+
