@@ -132,5 +132,14 @@
     <Image Include="images\pizzaGuyPizzaWalkRight(3).png">
       <Filter>images</Filter>
     </Image>
+    <Image Include="images\EmptyHeart.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\FullHeart.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\HalfHeart.png">
+      <Filter>images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

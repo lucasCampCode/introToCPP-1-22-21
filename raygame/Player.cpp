@@ -31,16 +31,17 @@ void Player::update(float deltaTime)
 {
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
 	int ydirection = IsKeyDown(KeyboardKey::KEY_S) - IsKeyDown(KeyboardKey::KEY_W);
+	bool attack = IsKeyDown(KeyboardKey::KEY_K);
 	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15))
 	{
 		if (xdirection > 0)
-			changeSprite(sprites[1][incrementSprite()]);
+			changeSprite(sprites[1 + (attack * 4)][incrementSprite()]);
 		else if (xdirection < 0)
-			changeSprite(sprites[2][incrementSprite()]);
+			changeSprite(sprites[2 + (attack * 4)][incrementSprite()]);
 		else if (ydirection < 0)
-			changeSprite(sprites[0][incrementSprite()]);
+			changeSprite(sprites[0 + (attack * 4)][incrementSprite()]);
 		else if (ydirection > 0)
-			changeSprite(sprites[3][incrementSprite()]);
+			changeSprite(sprites[3 + (attack * 4)][incrementSprite()]);
 			*m_spriteTimerPointer = 0;
 	}
 
