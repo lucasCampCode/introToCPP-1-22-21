@@ -26,7 +26,7 @@ void Enemy::onCollision(Actor* other)
 {
 	if(typeid(*other) == typeid(Player))
 		attack((Entity*)other);
-	other->setVelocity(getVelocity() * 3);
+	other->setAcceleration(getVelocity()*10);
 }
 
 void Enemy::update(float deltaTime)
@@ -37,7 +37,7 @@ void Enemy::update(float deltaTime)
 	}
 	else
 	{
-		setVelocity(MathLibrary::Vector2(rand() % 3 - 2,rand() % 3 - 2));
+		setVelocity(MathLibrary::Vector2((rand() % 3) - 2,(rand() % 3) - 2));
 	}
 	Entity::update(deltaTime);
 	if (getHealth() <= 0)
