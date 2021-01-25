@@ -24,23 +24,47 @@ void Player::start()
 
 void Player::update(float deltaTime)
 {
+	Entity::update(deltaTime);
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
 	int ydirection = IsKeyDown(KeyboardKey::KEY_S) - IsKeyDown(KeyboardKey::KEY_W);
-	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15))
-	{
-		if (xdirection > 0)
-			changeSprite(sprites[1][incrementSprite()]);
-		else if (xdirection < 0)
-			changeSprite(sprites[2][incrementSprite()]);
+	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15)) {
+		if (xdirection == 0 && ydirection == 0)
+			changeSprite(sprites[getCurrentDirection()][1]);
+		else if (xdirection > 0) {
+			setCurrentDirection(1);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
+		else if (xdirection < 0) {
+			setCurrentDirection(2);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
+		else if (ydirection > 0) {
+			setCurrentDirection(3);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
+		else if (ydirection < 0) {
+			setCurrentDirection(0);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
 		*m_spriteTimerPointer = 0;
 	}	
 
 	setVelocity(MathLibrary::Vector2(xdirection, ydirection) * m_maxSpeed);
-	Entity::update(deltaTime);
+	//if player get near the windows border it gets pushed back
+	if (getWorldPosition().x > 31.5f)
+		setVelocity(MathLibrary::Vector2(-1, 0));
+	else if (getWorldPosition().x < 0.5f)
+		setVelocity(MathLibrary::Vector2(1, 0));
+	else if (getWorldPosition().y > 23.5f)
+		setVelocity(MathLibrary::Vector2(0, -1));
+	else if (getWorldPosition().y < 0.5f)
+		setVelocity(MathLibrary::Vector2(0, 1));
 }
 
 void Player::draw()
-{ 
+{
+	//health
+	
 	Entity::draw();
 }
 

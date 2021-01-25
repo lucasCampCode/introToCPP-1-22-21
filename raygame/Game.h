@@ -115,7 +115,12 @@ private:
     Scene* m_start;
     Scene* m_highScore;
     Scene* m_load;
+
     Scene* m_screen1;
     Player* m_player1;
-
+    Actor* m_world1;
+    Wall* m_wall1;
+    Wall* m_wall2;
+    Wall* m_wall3;
+    Wall* m_wall4;
 };
