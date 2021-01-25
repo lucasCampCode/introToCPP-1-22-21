@@ -27,28 +27,32 @@ void Player::update(float deltaTime)
 	Entity::update(deltaTime);
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
 	int ydirection = IsKeyDown(KeyboardKey::KEY_S) - IsKeyDown(KeyboardKey::KEY_W);
-	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15)) {
-		if (xdirection == 0 && ydirection == 0)
+	bool attack = IsKeyDown(KeyboardKey::KEY_K);
+	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15))
+	{
+    if (xdirection == 0 && ydirection == 0)
 			changeSprite(sprites[getCurrentDirection()][1]);
-		else if (xdirection > 0) {
+		else if (xdirection > 0){
 			setCurrentDirection(1);
-			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
-		}
-		else if (xdirection < 0) {
+			changeSprite(sprites[getCurrentDirection() + (attack * 4)][incrementSprite()]);
+    }
+		else if (xdirection < 0){
 			setCurrentDirection(2);
-			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
-		}
-		else if (ydirection > 0) {
+			changeSprite(sprites[getCurrentDirection() + (attack * 4)][incrementSprite()]);
+    }
+		else if (ydirection < 0){
 			setCurrentDirection(3);
-			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
-		}
-		else if (ydirection < 0) {
+			changeSprite(sprites[getCurrentDirection() + (attack * 4)][incrementSprite()]);
+    }
+		else if (ydirection > 0){
 			setCurrentDirection(0);
-			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
-		}
-		*m_spriteTimerPointer = 0;
-	}	
-	
+			changeSprite(sprites[getCurrentDirection() + (attack * 4)][incrementSprite()]);
+    }
+			*m_spriteTimerPointer = 0;
+	}
+
+	Entity::update(deltaTime);
+
 	setVelocity(MathLibrary::Vector2(xdirection, ydirection) * m_maxSpeed);
 	if(getHealth() < 0)
 	{

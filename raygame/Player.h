@@ -16,6 +16,7 @@ public:
 	void draw() override;
 	void end() override;
 	float* m_spriteTimerPointer = &m_spriteTimer;
+  
 private:
 	int m_currentDirection = 3;
 	int m_currentSprite = 0;
