@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
-#include "Ground.h"
+#include "Wall.h"
+#include "Enemy.h"
 
 class Scene
 {

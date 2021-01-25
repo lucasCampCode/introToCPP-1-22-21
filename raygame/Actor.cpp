@@ -253,6 +253,7 @@ void Actor::onCollision(Actor* other)
 
 void Actor::update(float deltaTime)
 {
+    
     *m_localTransform = *m_translation * *m_rotation * *m_scale;
 
     updateGlobalTransform();
@@ -262,13 +263,25 @@ void Actor::update(float deltaTime)
     if (m_velocity.getMagnitude() > m_maxSpeed)
         m_velocity = m_velocity.getNormalized() * m_maxSpeed;
 
+if(getWorldPosition().x > 31.5f)
+        setVelocity(MathLibrary::Vector2(-1, 0));
+    else if (getWorldPosition().x < 0.5f)
+        setVelocity(MathLibrary::Vector2(1, 0));
+    else if (getWorldPosition().y > 23.5f)
+        setVelocity(MathLibrary::Vector2(0, -1));
+    else if (getWorldPosition().y < 0.5f)
+        setVelocity(MathLibrary::Vector2(0, 1));
+
     //Increase position by the current velocity
     setLocalPosition(getLocalPosition() + m_velocity * deltaTime);
+
+    
 }
 
 void Actor::draw()
 {
-    DrawCircle(getWorldPosition().x*32, getWorldPosition().y*32, m_collisionRadius*32, BLUE);
+   /*
+   DrawCircle(getWorldPosition().x*32, getWorldPosition().y*32, m_collisionRadius*32, BLUE);
     //Draws the actor and a line indicating it facing to the raylib window
     DrawLine(
         (int)(getWorldPosition().x*32),
@@ -277,7 +290,7 @@ void Actor::draw()
         (int)((getWorldPosition().y + getForward().y)*32),
         WHITE
     );
-
+    */
     if (m_sprite)
         m_sprite->draw(*m_globalTransform);
     //Raylib.DrawCircleLines((int)(WorldPosition.X * 32), (int)(WorldPosition.Y * 32), _collisionRadius * 32, _rayColor);

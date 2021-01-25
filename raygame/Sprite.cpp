@@ -57,6 +57,6 @@ void Sprite::draw(MathLibrary::Matrix3 transform)
     RAYLIB_H::DrawTextureEx(*m_texture, rayPos,
         (float)(rotation * 180.0f / PI), 32, WHITE);
 
-    DrawRectangleLines(rayPos.x, rayPos.y, getWidth()*32, getHeight()*32, RED);
+    //DrawRectangleLines(rayPos.x, rayPos.y, getWidth()*32, getHeight()*32, RED);
 }
 

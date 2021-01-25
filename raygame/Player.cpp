@@ -1,6 +1,5 @@
 #include "Player.h"
-#include "Ground.h"
-
+#include "Game.h"
 Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float health, float damage)
 	: Entity(x, y, collisionRadius, spriteFilePath, maxSpeed, health, damage)
 {
@@ -15,10 +14,6 @@ Player::~Player()
 
 void Player::onCollision(Actor* other)
 {
-	if (typeid(*other) == typeid(Ground))
-	{
-
-	}
 }
 
 void Player::start()
@@ -29,31 +24,42 @@ void Player::start()
 
 void Player::update(float deltaTime)
 {
+	Entity::update(deltaTime);
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
-	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15))
-	{
-		if (xdirection > 0)
-			changeSprite(sprites[1][incrementSprite()]);
-		else if (xdirection < 0)
-			changeSprite(sprites[2][incrementSprite()]);
+	int ydirection = IsKeyDown(KeyboardKey::KEY_S) - IsKeyDown(KeyboardKey::KEY_W);
+	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15)) {
+		if (xdirection == 0 && ydirection == 0)
+			changeSprite(sprites[getCurrentDirection()][1]);
+		else if (xdirection > 0) {
+			setCurrentDirection(1);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
+		else if (xdirection < 0) {
+			setCurrentDirection(2);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
+		else if (ydirection > 0) {
+			setCurrentDirection(3);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
+		else if (ydirection < 0) {
+			setCurrentDirection(0);
+			changeSprite(sprites[getCurrentDirection()][incrementSprite()]);
+		}
 		*m_spriteTimerPointer = 0;
 	}	
-
-	Entity::update(deltaTime);
-
-	setAcceleration(getAcceleration());
-
-	if (IsKeyPressed(KeyboardKey::KEY_SPACE))
+	
+	setVelocity(MathLibrary::Vector2(xdirection, ydirection) * m_maxSpeed);
+	if(getHealth() < 0)
 	{
-		setAcceleration(MathLibrary::Vector2(0, -50));
+		Game::setCurrentScene(4);
 	}
-
-	setVelocity(MathLibrary::Vector2(xdirection, 0) * m_maxSpeed);
-	Entity::update(deltaTime);
 }
 
 void Player::draw()
-{ 
+{
+	//health
+	
 	Entity::draw();
 }
 

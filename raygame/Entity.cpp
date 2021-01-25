@@ -7,7 +7,7 @@ Entity::Entity(float x, float y, float collisionRadius, const char* spriteFilePa
 {
 	m_health = health;
 	m_damage = damage;
-	m_gravity = MathLibrary::Vector2(0, 1);
+	m_gravity = MathLibrary::Vector2(0, 5);
 	setTag("Entity");
 }
 Entity::~Entity()
@@ -37,12 +37,18 @@ bool Entity::takeDamage(float totalDamage)
 
 void Entity::onCollision(Actor* other)
 {
-
 }
 
 void Entity::update(float deltaTime)
 {
-
+	if (getAcceleration().x > 0)
+		setAcceleration(MathLibrary::Vector2(getAcceleration().x - 1, getAcceleration().y));
+	if (getAcceleration().y > 0)
+		setAcceleration(MathLibrary::Vector2(getAcceleration().x, getAcceleration().y - 1));
+	if (getAcceleration().x < 0)
+		setAcceleration(MathLibrary::Vector2(getAcceleration().x + 1, getAcceleration().y));
+	if (getAcceleration().y < 0)
+		setAcceleration(MathLibrary::Vector2(getAcceleration().x, getAcceleration().y + 1));
 	Actor::update(deltaTime);
 }
 

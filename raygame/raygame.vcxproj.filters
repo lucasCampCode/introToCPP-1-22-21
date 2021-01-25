@@ -35,7 +35,10 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ground.cpp">
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -58,14 +61,14 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="images\placeholder.jpg">
-      <Filter>images</Filter>
-    </Image>
     <Image Include="..\..\..\..\..\Desktop\Assets No Background\pizzaGuy\PizzaGuyNoPizza\PizzaGuyWalkRight(2).png">
       <Filter>images</Filter>
     </Image>
@@ -100,6 +103,9 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\PizzaGuyWalkLeft(3).png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\firstMap.png">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>
