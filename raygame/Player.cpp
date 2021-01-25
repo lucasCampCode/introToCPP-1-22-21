@@ -21,12 +21,27 @@ void Player::onCollision(Actor* other)
 	}
 }
 
+void Player::start()
+{
+	Entity::start();
+	m_setTimerGoing(true);
+}
+
 void Player::update(float deltaTime)
 {
 	int xdirection = IsKeyDown(KeyboardKey::KEY_D) - IsKeyDown(KeyboardKey::KEY_A);
-	
+	if (m_spriteTimerStarted == true && ((*m_spriteTimerPointer += deltaTime) >= .15))
+	{
+		if (xdirection > 0)
+			changeSprite(sprites[1][incrementSprite()]);
+		else if (xdirection < 0)
+			changeSprite(sprites[2][incrementSprite()]);
+		*m_spriteTimerPointer = 0;
+	}	
 
-	setAcceleration(getAcceleration() + m_gravity);
+	Entity::update(deltaTime);
+
+	setAcceleration(getAcceleration());
 
 	if (IsKeyPressed(KeyboardKey::KEY_SPACE))
 	{
@@ -40,4 +55,22 @@ void Player::update(float deltaTime)
 void Player::draw()
 { 
 	Entity::draw();
+}
+
+void Player::end()
+{
+	Entity::end();
+	m_setTimerGoing(false);
+}
+
+void Player::m_setTimerGoing(bool value)
+{
+	m_spriteTimerStarted = value;
+}
+
+int Player::incrementSprite()
+{
+	m_currentSprite++;
+	if (m_currentSprite > 2) { m_currentSprite = 0; }
+	return m_currentSprite;
 }

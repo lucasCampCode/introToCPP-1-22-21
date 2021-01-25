@@ -110,6 +110,7 @@ private:
     Rectangle m_loadB;
     Rectangle m_exitB;
     Rectangle m_returnB;
+    Rectangle m_tableB;
     
     Scene* m_start;
     Scene* m_highScore;
