@@ -41,14 +41,12 @@ void Game::start()
 	m_screen1 = new Scene();
 	m_highScore = new Scene();
 	m_load = new Scene();
-	m_player1 = new Player(10, 10, 1, "images\placeholder.jpg", 5, 100, 10);
-	m_block = new Ground(0,20,20,2);
+	m_player1 = new Player(10, 10, 1, "images\placeholder.jpg", 10, 100, 10);
 	setCurrentScene(addScene(m_start));//index 0
 	addScene(m_highScore);//index 1
 	addScene(m_load);//index 2
 	addScene(m_screen1);//index 3
 	m_screen1->addActor(m_player1);
-	m_screen1->addActor(m_block);
 }
 
 void Game::initRecs()
@@ -103,6 +101,7 @@ void Game::updateSceneButtons()
 			setCurrentScene(0);
 		break;
 	case 3:
+
 		break;
 	default:
 		break;

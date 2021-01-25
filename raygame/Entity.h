@@ -9,7 +9,9 @@ public:
 public:
 	virtual bool attack(Entity* other);
 	virtual bool takeDamage(float totalDamage);
-
+	MathLibrary::Vector2 getGravity() { return m_gravity; };
+	void setGravity(MathLibrary::Vector2 value) { m_gravity = value; }
+	
 	void onCollision(Actor* other) override;
 	void update(float deltaTime) override;
 	void draw() override;
