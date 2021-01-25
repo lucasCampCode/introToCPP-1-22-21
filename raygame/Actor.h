@@ -181,6 +181,13 @@ public:
     virtual void draw();
     virtual void debug();
     virtual void end();
+    virtual int changeSprite(const char* spritefilepath);
+    const char* sprites[4][3] = {
+        {"images/PizzaGuyWalkAway(1).png","images/PizzaGuyWalkAway(2).png","images/PizzaGuyWalkAway(3).png"},
+        {"images/PizzaGuyWalkRight(1).png","images/PizzaGuyWalkRight(2).png","images/PizzaGuyWalkRight(3).png"},
+        {"images/PizzaGuyWalkLeft(1).png","images/PizzaGuyWalkLeft(2).png","images/PizzaGuyWalkLeft(3).png"},
+        {"images/PizzaGuyWalkForward(1).png","images/PizzaGuyWalkForward(2).png","images/PizzaGuyWalkForward(3).png"},
+    };
 
 protected:
     /// <summary>

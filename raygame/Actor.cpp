@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include "raylib.h"
 #include "Sprite.h"
+#include <fstream>
 
 Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float maxSpeed = 1)
 {
@@ -280,7 +281,7 @@ void Actor::draw()
     if (m_sprite)
         m_sprite->draw(*m_globalTransform);
     //Raylib.DrawCircleLines((int)(WorldPosition.X * 32), (int)(WorldPosition.Y * 32), _collisionRadius * 32, _rayColor);
-}
+} 
 
 void Actor::debug()
 {
@@ -290,6 +291,16 @@ void Actor::debug()
 void Actor::end()
 {
     m_started = false;
+}
+
+int Actor::changeSprite(const char* spritefilepath)
+{
+    if(m_sprite)
+    {
+        delete m_sprite;
+    }
+    m_sprite = new Sprite(spritefilepath);
+    return 0;
 }
 
 void Actor::updateFacing()
