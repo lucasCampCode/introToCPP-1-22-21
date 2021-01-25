@@ -113,6 +113,7 @@ private:
     Rectangle m_exitB;
     Rectangle m_returnB;
     Rectangle m_tableB;
+    Rectangle m_healthBarHolder;
     Rectangle m_healthBar;
 
     Scene* m_start;

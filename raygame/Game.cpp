@@ -86,6 +86,11 @@ void Game::initRecs()
 	m_healthBar.y = 10;
 	m_healthBar.width = 100;
 	m_healthBar.height = 30;
+
+	m_healthBarHolder.x = 10;
+	m_healthBarHolder.y = 10;
+	m_healthBarHolder.width = 100;
+	m_healthBarHolder.height = 30;
 }
 
 void Game::updateSceneButtons()
@@ -153,8 +158,11 @@ void Game::drawScreenButtons()
 
 void Game::drawHealthBar(int posX, int posY)
 {
+	float healthPercent = 0;
 	DrawRectangleRec(m_healthBarHolder, BLACK);
+	DrawRectangleRec(m_healthBar, RED);
 	DrawRectangleLinesEx(m_healthBarHolder, 4, WHITE);
+	m_healthBar.width = (100 * (*m_player1->m_healthPtr / static_cast<float>(10)));
 }
 
 void Game::update(float deltaTime)
