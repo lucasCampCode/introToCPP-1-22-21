@@ -50,7 +50,7 @@ void Game::start()
 	m_screen1->addActor(m_player1);
 	for (int i = 0; i < 5; i++)
 	{
-		m_hearts[i] = new Actor(18 + (16 * i), 8, 0, "images/HeartEmpty.png", 0);
+		m_hearts[i] = new Actor(i + 1, 1, 0, "images/EmptyHeart.png", 0);
 		m_screen1->addActor(m_hearts[i]);
 	}
 }
@@ -160,15 +160,17 @@ void Game::drawHealthBar(int posX, int posY)
 {
 	DrawRectangleRec(m_healthBar, BLACK);
 	DrawRectangleLinesEx(m_healthBar, 4, WHITE);
-	for (int i = 0; i < 5; i++)
-	{
-		if (*m_player1->m_healthPtr = (i * 2))
-			m_hearts[i]->changeSprite(m_heartSprites[0]);
-		else if (*m_player1->m_healthPtr < (i * 2))
-			m_hearts[i]->changeSprite(m_heartSprites[1]);
-		else if (*m_player1->m_healthPtr > (i * 2))
-			m_hearts[i]->changeSprite(m_heartSprites[2]);
-	}
+	if (*m_player1->m_oldHealthPtr != *m_player1->m_healthPtr)
+		for (int i = 0; i < 5; i++)
+		{
+			/*if (*m_player1->m_healthPtr = (i * 2) && m_hearts[i])
+				m_hearts[i]->changeSprite(m_heartSprites[2]);
+			else if (*m_player1->m_healthPtr < (i * 2))
+				m_hearts[i]->changeSprite(m_heartSprites[1]);
+			else if (*m_player1->m_healthPtr > (i * 2))
+				m_hearts[i]->changeSprite(m_heartSprites[2]);*/
+		}
+	*m_player1->m_oldHealthPtr = *m_player1->m_healthPtr;
 }
 
 void Game::update(float deltaTime)
@@ -187,7 +189,8 @@ void Game::draw()
 
 	BeginMode2D(*m_camera);
 	ClearBackground(BLACK);
-
+	if (m_showHealth)
+		drawHealthBar(1, 1);
 	m_scenes[m_currentSceneIndex]->draw();
 	drawScreenButtons();
 	EndMode2D();

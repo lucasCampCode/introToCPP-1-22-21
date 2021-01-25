@@ -36,7 +36,6 @@ public:
     /// </summary>
     /// <returns>If the actors start function has been called.</returns>
     bool getStarted() { return m_started; }
-
     /// <summary>
     /// </summary>
     /// <returns>A pointer to the actor that has been set as this actors parent.</returns>
@@ -182,6 +181,7 @@ public:
     virtual void debug();
     virtual void end();
     virtual int changeSprite(const char* spritefilepath);
+    virtual void changeSprite(Sprite* sprite) { m_sprite = sprite; };
     const char* sprites[8][3] = {
         {"images/PizzaGuyWalkAway(1).png","images/PizzaGuyWalkAway(2).png","images/PizzaGuyWalkAway(3).png"},
         {"images/PizzaGuyWalkRight(1).png","images/PizzaGuyWalkRight(2).png","images/PizzaGuyWalkRight(3).png"},

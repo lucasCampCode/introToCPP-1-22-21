@@ -15,8 +15,10 @@ public:
 	void end() override;
 	float* m_spriteTimerPointer = &m_spriteTimer;
 	float* m_healthPtr = &m_health;
+	float* m_oldHealthPtr = &m_oldHealth;
 private:
 	float m_health = 10;
+	float m_oldHealth = m_health;
 	int m_currentSprite = 0;
 	float m_spriteTimer;
 	bool m_spriteTimerStarted;

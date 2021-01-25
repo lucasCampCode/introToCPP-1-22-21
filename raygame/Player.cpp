@@ -43,6 +43,7 @@ void Player::update(float deltaTime)
 		else if (ydirection > 0)
 			changeSprite(sprites[3 + (attack * 4)][incrementSprite()]);
 			*m_spriteTimerPointer = 0;
+			*m_healthPtr -= 1;
 	}
 
 	Entity::update(deltaTime);

@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "Sprite.h"
 class Camera2D;
 
 static class Game
@@ -88,25 +89,20 @@ public:
     static bool withinBounds(int Lp, int Tp, int Rp, int Bp);
 
 private:
-	void start();
+    void start();
     void initRecs();
     void updateSceneButtons();
     void drawScreenButtons();
     void drawHealthBar(int posX, int posY);
     void update(float delaTime);
-	void draw();
-	void end();
-    const char* m_heartSprites[3] = {
-       "images/EmptyHeart.png",
-       "images/HalfHeart.png",
-       "images/FullHeart.png"
-    };
+    void draw();
+    void end();
 private:
     Camera2D* m_camera;
     static bool m_gameOver;
     static bool m_gameStarted;
     bool m_showHealth;
-	static Scene** m_scenes;
+    static Scene** m_scenes;
     static int m_sceneCount;
     static int m_currentSceneIndex;
 
@@ -118,7 +114,7 @@ private:
     Rectangle m_returnB;
     Rectangle m_tableB;
     Rectangle m_healthBar;
-    
+
     Scene* m_start;
     Scene* m_highScore;
     Scene* m_load;
@@ -127,5 +123,9 @@ private:
     Player* m_player1;
     Ground* m_block;
     Actor* m_hearts[5];
-
+    const char* m_heartSprites[3] = {
+    "images/EmptyHeart.png",
+    "images/HalfHeart.png",
+    "images/FullHeart.png"
+    };
 };
