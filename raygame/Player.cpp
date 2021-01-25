@@ -40,7 +40,7 @@ void Player::update(float deltaTime)
 
 	Entity::update(deltaTime);
 
-	setAcceleration(getAcceleration() + m_gravity);
+	setAcceleration(getAcceleration());
 
 	if (IsKeyPressed(KeyboardKey::KEY_SPACE))
 	{
