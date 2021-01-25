@@ -126,4 +126,5 @@ private:
     //Wall* m_wall2;
     //Wall* m_wall3;
     //Wall* m_wall4;
+    Scene* m_playerDeath;
 };

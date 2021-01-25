@@ -38,6 +38,7 @@ void Game::start()
 
 	SetTargetFPS(60);
 	m_start = new Scene();
+	m_playerDeath = new Scene();
 	//first scene and background
 	m_screen1 = new Scene();
 	m_world1 = new Actor(16, 12, 0, "images/firstMap.png", 0);
@@ -62,6 +63,7 @@ void Game::start()
 	addScene(m_highScore);//index 1
 	addScene(m_load);//index 2
 	addScene(m_screen1);//index 3
+	addScene(m_playerDeath);//index 4
 	m_screen1->addActor(m_world1);
 	m_screen1->addActor(m_player1);
 
@@ -128,7 +130,8 @@ void Game::updateSceneButtons()
 			setCurrentScene(0);
 		break;
 	case 3:
-		
+		break;
+	case 4:
 		break;
 	default:
 		break;
@@ -137,10 +140,11 @@ void Game::updateSceneButtons()
 
 void Game::startWave(float deltaTime)
 {
-	if ((m_timer+=deltaTime) > 10) 
+	if ((m_timer+=deltaTime) > 5) 
 	{
 		if(m_enemyCount < 20)
-			m_screen1->addActor(m_enemies[m_enemyCount++]);
+			m_screen1->addActor(m_enemies[m_enemyCount]);
+		m_enemyCount++;
 		m_timer = 0;
 	}
 }
@@ -169,6 +173,8 @@ void Game::drawScreenButtons()
 		DrawText("return", m_returnB.x + 20, m_returnB.y + 0, 80, WHITE);
 		break;
 	case 3:
+		break;
+	case 4:
 		break;
 	default:
 		break;

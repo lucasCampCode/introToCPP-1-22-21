@@ -26,7 +26,7 @@ void Enemy::onCollision(Actor* other)
 {
 	if(typeid(*other) == typeid(Player))
 		attack((Entity*)other);
-	other->setVelocity(getVelocity());
+	other->setVelocity(getVelocity() * 3);
 }
 
 void Enemy::update(float deltaTime)
